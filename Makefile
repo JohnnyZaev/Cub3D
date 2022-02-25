@@ -6,7 +6,7 @@
 #    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/25 15:07:27 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/25 15:45:37 by gvarys           ###   ########.fr        #
+#    Updated: 2022/02/25 16:30:26 by gvarys           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ LIBFT				=	$(LIBFT_DIR)libft.a
 LIBFT_FLAGS			=	-lft
 
 MLX_DIR				=	minilibx_opengl/
-MLX					=	$(MLX_DIR)mlx.a
-MLX_FLAGS			=	-lmlx -framework OpenGL -framework AppKit
+MLX					=	$(MLX_DIR)libmlx.a
+MLX_FLAGS			=	-lmlx -framework OpenGL -framework AppKit -lz
 
 SRC_FILES			=	main.c\
 
@@ -46,7 +46,7 @@ $(NAME)				:	$(OBJS)
 							$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) $(LIBFT_FLAGS) -L$(MLX_DIR) $(MLX_FLAGS) -o $@
 
 %.o					:	%.c $(HEADER)
-							$(CC) $(CFLAGS) -I$(HEADER_DIR) -c $< -o $@
+							$(CC) $(CFLAGS) -I$(HEADER_DIR) -I$(MLX_DIR) -c $< -o $@
 
 clean				:
 							$(RM) $(OBJS)
