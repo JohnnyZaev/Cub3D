@@ -6,7 +6,7 @@
 /*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:23:25 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/25 16:31:22 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/02/27 19:42:29 by gvarys           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@
 # include <time.h>
 # include "../minilibx_opengl/mlx.h"
 # include "../libft/libft.h"
+
+int	errors(int err);
 
 #endif
