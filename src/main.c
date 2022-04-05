@@ -80,8 +80,8 @@ int	main(int argc, char **argv)
 {
 	void	*mlx;
 	void	*win;
-//	int		size_x;
-//	int		size_y;
+	int		size_x;
+	int		size_y;
 
 	(void)argv;
 	if (argc != 2)
@@ -89,9 +89,10 @@ int	main(int argc, char **argv)
 	mlx = mlx_init();
 	if (!mlx)
 		errors(2);
-//	mlx_get_screen_size(&size_x, &size_y);
-	win = mlx_new_window(mlx, screenWidth, screenHeight, "cub3D");
-	draw_line(mlx, win, screenWidth, screenHeight, 0, 0, 0xFFFFFF);
+	mlx_get_screen_size(&size_x, &size_y);
+	win = mlx_new_window(mlx, size_x, size_y, "cub3D");
+	draw_line(mlx, win, 0, 0, 200, 200, 0xFFFFFF);
+	draw_line(mlx, win, 0, 70, 340, 200, 0xFFAFAF);
 	mlx_loop(mlx);
 	return (0);
 }
