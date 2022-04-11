@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/25 15:07:27 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/25 16:30:26 by gvarys           ###   ########.fr        #
+#    Updated: 2022/04/11 16:13:44 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ MLX					=	$(MLX_DIR)libmlx.a
 MLX_FLAGS			=	-lmlx -framework OpenGL -framework AppKit -lz
 
 SRC_FILES			=	main.c\
+						drawing.c\
+						parser.c
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 

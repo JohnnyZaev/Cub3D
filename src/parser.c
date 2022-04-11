@@ -1,0 +1,133 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/04/11 13:21:56 by ereginia          #+#    #+#             */
+/*   Updated: 2022/04/11 17:53:21 by ereginia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+void room_for_map(t_mlx_god* god, char *file_name)
+{
+	int		fd;
+	int		i = 0;
+	int		x_max = 0;
+	int		y_max = 0;
+	char	*str;
+
+	fd = open(file_name, O_RDONLY, 0644);
+	str = get_next_line(fd);
+	while (str)
+	{
+		if (x_max < (int)ft_strlen(str))
+			x_max = (int)ft_strlen(str);
+		y_max++;
+		free(str);
+		str = get_next_line(fd);
+	}
+	god->map = (char **)malloc(sizeof(char *) * y_max + 1);
+	while (i < y_max)
+	{
+		god->map[i] = (char *)malloc(sizeof(char) * (x_max + 1));
+		memset(god->map[i], ' ', sizeof(char) * (x_max + 1));
+		god->map[i][x_max] = '\0';
+		i++;
+	}
+	god->map[i] = NULL;
+	close(fd);
+}
+
+void fill_map(t_mlx_god* god, char *file_name)
+{
+	char	*str;
+	int		fd;
+	int		i = 0;
+	int		j = 0;
+
+	fd = open(file_name, O_RDONLY, 0644);
+	str = get_next_line(fd);
+	while (str)
+	{
+		j = 0;
+		while (str[j] && str[j] != '\n')
+		{
+			god->map[i][j] = str[j];
+			j++;
+		}
+		free(str);
+		str = get_next_line(fd);
+		i++;
+	}
+}
+
+int	check_map(t_mlx_god* god)
+{
+	int i = 0;
+	int j = 0;
+	int flag = 0;
+
+	while (god->map[i])
+	{
+		j = 0;
+		while (god->map[i][j])
+		{
+			if (god->map[i][j] == 'N' || god->map[i][j] == 'S'
+					|| god->map[i][j] == 'E' || god->map[i][j] == 'W')
+			{
+				if (flag == 1)
+					return (1);
+				flag = 1;
+				if (god->map[i][j] == 'N')
+					god->player->angle = M_PI / 2;
+				else if (god->map[i][j] == 'S')
+					god->player->angle = 3 * M_PI / 2;
+				else if (god->map[i][j] == 'E')
+					god->player->angle = 0;
+				else if (god->map[i][j] == 'W')
+					god->player->angle = M_PI;
+				god->player->x = i * 10;
+				god->player->y = j * 10;
+			}
+			else if (god->map[i][j] == '0')
+			{
+				if ((i > 0 && god->map[i - 1][j] == ' ') || \
+					(i < god->size_x &&  god->map[i + 1][j] == ' ') || \
+					(j > 0 && god->map[i][j - 1] == ' ') || \
+					(j < god->size_y && god->map[i][j + 1] == ' ') || \
+					(i == 0 || j == 0 || i == god->size_x || j == god->size_y))
+				    return 1;
+			}
+			else if (god->map[i][j] != '1' && god->map[i][j] != ' ')
+				return 1;
+			j++;
+		}
+		i++;
+	}
+	if (!flag)
+		return 1;
+	return 0;
+}
+
+void	parser(t_mlx_god* god, char *file_name)
+{
+	int i;
+
+	i = 0;
+	room_for_map(god, file_name);
+	fill_map(god, file_name);
+	if (check_map(god))
+	{
+		printf("sorry but this is shit\n");
+		while(god->map[i])
+		{
+			free(god->map[i]);
+			i++;
+		}
+		free(god->map);
+	}
+}

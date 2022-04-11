@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:21:46 by gvarys            #+#    #+#             */
-/*   Updated: 2022/02/27 19:42:09 by gvarys           ###   ########.fr       */
+/*   Updated: 2022/04/11 17:50:43 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,66 @@ int	errors(int err)
 	exit(err);
 }
 
+int	ft_key_action(int keycode, t_mlx_god*	god)
+{
+	int	code;
+	double sin_a;
+	double cos_a;
+
+	code = 0;
+	sin_a = sin(god->player->angle);
+	cos_a = cos(god->player->angle);
+	if (keycode == UP)
+	{
+		god->player->x += god->player->speed * cos_a;
+		god->player->y += god->player->speed * sin_a;
+	}
+	else if (keycode == DOWN)
+	{
+		god->player->x += -god->player->speed * cos_a;
+		god->player->y += -god->player->speed * sin_a;
+	}
+	else if (keycode == LEFT)
+	{
+		god->player->x += god->player->speed * sin_a;
+		god->player->y += -god->player->speed * cos_a;
+	}
+	else if (keycode == RIGHT)
+	{
+		god->player->x += -god->player->speed * sin_a;
+		god->player->y += god->player->speed * cos_a;
+	}
+	else if (keycode == RC_ROTATE)
+	{
+		god->player->angle -= 0.05;
+	}
+	else if (keycode == CL_ROTATE)
+	{
+		god->player->angle += 0.05;
+	}
+	mlx_clear_window(god->mlx, god->win);
+	print_player_dot(god->player, god);
+	print_player_ray(god, god->player);
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*win;
-	int		size_x;
-	int		size_y;
+	t_player	player;
+	t_mlx_god	god;
 
 	(void)argv;
 	if (argc != 2)
-		errors(3);
-	mlx = mlx_init();
-	if (!mlx)
-		errors(2);
-	mlx_get_screen_size(&size_x, &size_y);
-	win = mlx_new_window(mlx, size_x, size_y, "cub3D");
-	mlx_loop(mlx);
-	return (0);
+	{
+		printf("fogot something\n");
+		return 1;
+	}
+	god.player = &player;
+	parser(&god, argv[1]);
+	god.mlx = mlx_init();
+	god.win = mlx_new_window(god.mlx, 1000, 1000, "Cub3D");
+	player.v_range = 150;
+	player.speed = 5;
+	mlx_hook(god.win, 2, 0, ft_key_action, &god);
+	mlx_loop(god.mlx);
 }
