@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:21:46 by gvarys            #+#    #+#             */
-/*   Updated: 2022/04/11 17:50:43 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/04/12 17:35:04 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	main(int argc, char **argv)
 {
 	t_player	player;
 	t_mlx_god	god;
+	int i = 0;
 
 	(void)argv;
 	if (argc != 2)
@@ -78,11 +79,16 @@ int	main(int argc, char **argv)
 		return 1;
 	}
 	god.player = &player;
+	god.c_color = 0;
+	god.f_color = 0;
 	parser(&god, argv[1]);
-	god.mlx = mlx_init();
-	god.win = mlx_new_window(god.mlx, 1000, 1000, "Cub3D");
+	// god.mlx = mlx_init();
+	// god.win = mlx_new_window(god.mlx, 1000, 1000, "Cub3D");
 	player.v_range = 150;
 	player.speed = 5;
-	mlx_hook(god.win, 2, 0, ft_key_action, &god);
-	mlx_loop(god.mlx);
+	// mlx_hook(god.win, 2, 0, ft_key_action, &god);
+	// mlx_loop(god.mlx);
+	// while (god.map[i])
+	//     printf("%s\n", god.map[i++]);
+    printf("floor - %d\nceilling - %d\n", god.f_color, god.c_color);
 }

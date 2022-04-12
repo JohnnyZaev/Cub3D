@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:23:25 by gvarys            #+#    #+#             */
-/*   Updated: 2022/04/11 17:11:01 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:44:27 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ typedef struct s_mlx_god
 	char		**map;
 	int			size_x;
 	int			size_y;
+	int			f_color;
+	int			c_color;
+	char		*textures[4];
 } t_mlx_god;
 
 int	errors(int err);

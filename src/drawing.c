@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 12:17:16 by ereginia          #+#    #+#             */
-/*   Updated: 2022/04/11 17:16:57 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:23:11 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	print_player_ray(t_mlx_god*	god, t_player* player)
 	cos_a = cos(player->angle);
 	while ((double)i < player->v_range)
 	{
-		mlx_pixel_put(god->mlx, god->win, (player->x + i * cos_a), (player->y + i * sin_a), 0xFF0000);
+		mlx_pixel_put(god->mlx, god->win, (player->x + i * cos_a), (player->y + i * sin_a), 63743);
 		i++;
 	}
 }
