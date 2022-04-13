@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:21:46 by gvarys            #+#    #+#             */
-/*   Updated: 2022/04/12 17:35:04 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/04/13 16:45:16 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,18 @@ int	ft_key_action(int keycode, t_mlx_god*	god)
 	return (1);
 }
 
+void	ft_init(t_mlx_god*	god, t_player* player)
+{
+	god->player = player;
+	god->size_x = 0;
+	god->size_y = 0;
+	god->c_color = 0;
+	god->f_color = 0;
+	god->map = NULL;
+	player->v_range = 150;
+	player->speed = 5;
+}
+
 int	main(int argc, char **argv)
 {
 	t_player	player;
@@ -78,17 +90,17 @@ int	main(int argc, char **argv)
 		printf("fogot something\n");
 		return 1;
 	}
-	god.player = &player;
-	god.c_color = 0;
-	god.f_color = 0;
+	ft_init(&god, &player);
 	parser(&god, argv[1]);
 	// god.mlx = mlx_init();
 	// god.win = mlx_new_window(god.mlx, 1000, 1000, "Cub3D");
-	player.v_range = 150;
-	player.speed = 5;
+	if (god.map)
+	{
+		while (god.map[i])
+			printf("%s\n", god.map[i++]);
+	}
+	printf("floor - %d\nceilling - %d\n", god.f_color, god.c_color);
+	printf("textures:\n%s\n%s\n%s\n", god.textures[0], god.textures[1], god.textures[2]);
 	// mlx_hook(god.win, 2, 0, ft_key_action, &god);
 	// mlx_loop(god.mlx);
-	// while (god.map[i])
-	//     printf("%s\n", god.map[i++]);
-    printf("floor - %d\nceilling - %d\n", god.f_color, god.c_color);
 }

@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:23:25 by gvarys            #+#    #+#             */
-/*   Updated: 2022/04/12 12:44:27 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:14:35 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,5 +65,11 @@ void	print_player_ray(t_mlx_god*	god, t_player* player);
 
 // parser.c
 void	parser(t_mlx_god* god, char *file_name);
+// parser_element_part.c
+int		parse_textures_and_color(t_mlx_god* god, char *file_name, int *fd);
+
+// ft_clean.c
+void	ft_clean(t_mlx_god*	god, int mode);
+
 
 #endif
