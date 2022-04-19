@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gvarys <gvarys@student.21-school.ru>       +#+  +:+       +#+         #
+#    By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/25 15:07:27 by gvarys            #+#    #+#              #
-#    Updated: 2022/02/25 16:30:26 by gvarys           ###   ########.fr        #
+#    Updated: 2022/04/13 15:00:29 by ereginia         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				=	cub3D
 
 CC					=	cc
-CFLAGS				=	-O2 -Wall -Wextra -Werror
+CFLAGS				=	-O2 -Wall -Wextra -Werror -g3
 
 RM					=	rm -rf
 
@@ -31,6 +31,10 @@ MLX					=	$(MLX_DIR)libmlx.a
 MLX_FLAGS			=	-lmlx -framework OpenGL -framework AppKit -lz
 
 SRC_FILES			=	main.c\
+						drawing.c\
+						parser.c\
+						parser_element_part.c\
+						ft_clean.c
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 
