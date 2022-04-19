@@ -153,9 +153,6 @@ int	check_map(t_mlx_god* god)
 
 void	parser(t_mlx_god* god, char *file_name)
 {
-	int i;
-
-	i = 0;
 	if (room_for_map(god, file_name))
 	{
 		printf("error: invalid elements\n");

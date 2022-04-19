@@ -95,7 +95,6 @@ int	parse_textures_and_color(t_mlx_god* god, char *file_name, int *fd)
 {
 	char	*str;
 	char	flags[6];
-	int		spaces;
 
 	*fd = open(file_name, O_RDONLY, 0644);
 	ft_memset(god->textures, 0, sizeof(char *) * 4);
@@ -105,7 +104,6 @@ int	parse_textures_and_color(t_mlx_god* god, char *file_name, int *fd)
 		return (1);
 	while (str)
 	{
-		spaces = 0;
 		if (!ft_strncmp(str, "NO ", 3))
 		{
 			if (write_to_textures_massive(god, &flags[0], 0, str))

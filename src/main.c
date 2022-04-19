@@ -25,11 +25,9 @@ int	errors(int err)
 
 int	ft_key_action(int keycode, t_mlx_god*	god)
 {
-	int	code;
 	double sin_a;
 	double cos_a;
 
-	code = 0;
 	sin_a = sin(god->player->angle);
 	cos_a = cos(god->player->angle);
 	if (keycode == UP)
@@ -92,8 +90,8 @@ int	main(int argc, char **argv)
 	}
 	ft_init(&god, &player);
 	parser(&god, argv[1]);
-	// god.mlx = mlx_init();
-	// god.win = mlx_new_window(god.mlx, 1000, 1000, "Cub3D");
+	 god.mlx = mlx_init();
+	 god.win = mlx_new_window(god.mlx, 1000, 1000, "Cub3D");
 	if (god.map)
 	{
 		while (god.map[i])
@@ -101,6 +99,6 @@ int	main(int argc, char **argv)
 	}
 	printf("floor - %d\nceilling - %d\n", god.f_color, god.c_color);
 	printf("textures:\n%s\n%s\n%s\n", god.textures[0], god.textures[1], god.textures[2]);
-	// mlx_hook(god.win, 2, 0, ft_key_action, &god);
-	// mlx_loop(god.mlx);
+	 mlx_hook(god.win, 2, 0, ft_key_action, &god);
+	 mlx_loop(god.mlx);
 }
