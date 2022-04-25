@@ -21,21 +21,47 @@ void	print_player_dot(t_player*	player, t_mlx_god*	god)
 	mlx_pixel_put(god->mlx, god->win, player->x + 1, player->y - 1, 0xFFFF00);
 }
 
-void	print_rectangle(t_mlx_god*	god, int id_x, int id_y, int width, int heith)
+void draw_map(t_mlx_god*	god)
+{
+	int i;
+	int j;
+
+	i = 0;
+	printf("%d, %d\n", god->size_x, god->size_y);
+	while (i < god->size_y)
+	{
+		j = 0;
+		while (j < god->size_x)
+		{
+			if (god->map[i][j] == '1')
+			{
+				print_rectangle(god, j * god->size_y, i * god->size_x, 64, 64, 0xFF0000);
+			}
+			if (god->map[i][j] == '0')
+			{
+				print_rectangle(god, j * god->size_y, i * god->size_x, 64, 64, 0xFFFF00);
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+void	print_rectangle(t_mlx_god*	god, int id_x, int id_y, int width, int heith, int colour)
 {
 	int i = id_x;
 
 	while (i < id_x + width)
 	{
-		mlx_pixel_put(god->mlx, god->win, i, id_y, 0xFF0000);
-		mlx_pixel_put(god->mlx, god->win, i, id_y + heith, 0xFF0000);
+		mlx_pixel_put(god->mlx, god->win, i, id_y, colour);
+		mlx_pixel_put(god->mlx, god->win, i, id_y + heith, colour);
 		i++;
 	}
 	i = id_y;
 	while (i < id_y + heith)
 	{
-		mlx_pixel_put(god->mlx, god->win, id_x, i, 0xFF0000);
-		mlx_pixel_put(god->mlx, god->win, id_x + width, i, 0xFF0000);
+		mlx_pixel_put(god->mlx, god->win, id_x, i, colour);
+		mlx_pixel_put(god->mlx, god->win, id_x + width, i, colour);
 		i++;
 	}
 }

@@ -85,13 +85,13 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 2)
 	{
-		printf("fogot something\n");
+		printf("forgot something\n");
 		return 1;
 	}
 	ft_init(&god, &player);
 	parser(&god, argv[1]);
-	 god.mlx = mlx_init();
-	 god.win = mlx_new_window(god.mlx, 1000, 1000, "Cub3D");
+	god.mlx = mlx_init();
+	god.win = mlx_new_window(god.mlx, 1000, 1000, "Cub3D");
 	if (god.map)
 	{
 		while (god.map[i])
@@ -99,6 +99,6 @@ int	main(int argc, char **argv)
 	}
 	printf("floor - %d\nceilling - %d\n", god.f_color, god.c_color);
 	printf("textures:\n%s\n%s\n%s\n", god.textures[0], god.textures[1], god.textures[2]);
-	 mlx_hook(god.win, 2, 0, ft_key_action, &god);
-	 mlx_loop(god.mlx);
+	mlx_hook(god.win, 2, 0, ft_key_action, &god);
+	mlx_loop(god.mlx);
 }

@@ -59,7 +59,8 @@ int	errors(int err);
 
 // drawing.c
 void	print_player_dot(t_player*	player, t_mlx_god*	god);
-void	print_rectangle(t_mlx_god*	god, int id_x, int id_y, int width, int heith);
+void	print_rectangle(t_mlx_god*	god, int id_x, int id_y, int width, int heith, int colour);
+void	draw_map(t_mlx_god*	god);
 void	print_line(t_mlx_god*	god, int id_x, int id_y, int end_x, int end_y);
 void	print_player_ray(t_mlx_god*	god, t_player* player);
 
