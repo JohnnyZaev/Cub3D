@@ -56,18 +56,18 @@ int room_for_map(t_mlx_god* god, char *file_name)
 		return (1);
 	while (str)
 	{
-		if (god->size_x < (int)ft_strlen(str))
-			god->size_x = (int)ft_strlen(str);
-		god->size_y++;
+		if (god->map_size_x < (int)ft_strlen(str))
+			god->map_size_x = (int)ft_strlen(str);
+		god->map_size_y++;
 		free(str);
 		str = get_next_line(fd);
 	}
-	god->map = (char **)malloc(sizeof(char *) * god->size_y + 1);
-	while (i < god->size_y)
+	god->map = (char **)malloc(sizeof(char *) * god->map_size_y + 1);
+	while (i < god->map_size_y)
 	{
-		god->map[i] = (char *)malloc(sizeof(char) * (god->size_x + 1));
-		ft_memset(god->map[i], ' ', sizeof(char) * (god->size_x + 1));
-		god->map[i][god->size_x] = '\0';
+		god->map[i] = (char *)malloc(sizeof(char) * (god->map_size_x + 1));
+		ft_memset(god->map[i], ' ', sizeof(char) * (god->map_size_x + 1));
+		god->map[i][god->map_size_x] = '\0';
 		i++;
 	}
 	god->map[i] = NULL;
@@ -121,23 +121,23 @@ int	check_map(t_mlx_god* god)
 					return (1);
 				flag = 1;
 				if (god->map[i][j] == 'N')
-					god->player->angle =  3 * M_PI / 2;
+					god->player->angle =  270;
 				else if (god->map[i][j] == 'S')
-					god->player->angle =  M_PI / 2;
+					god->player->angle =  90;
 				else if (god->map[i][j] == 'E')
 					god->player->angle = 0;
 				else if (god->map[i][j] == 'W')
-					god->player->angle = M_PI;
+					god->player->angle = 180;
 				god->player->x = i * 10;
 				god->player->y = j * 10;
 			}
 			else if (god->map[i][j] == '0')
 			{
 				if ((i > 0 && god->map[i - 1][j] == ' ') || \
-					(i < god->size_x &&  god->map[i + 1][j] == ' ') || \
+					(i < god->map_size_x &&  god->map[i + 1][j] == ' ') || \
 					(j > 0 && god->map[i][j - 1] == ' ') || \
-					(j < god->size_y && god->map[i][j + 1] == ' ') || \
-					(i == 0 || j == 0 || i == god->size_y || j == god->size_x))
+					(j < god->map_size_y && god->map[i][j + 1] == ' ') || \
+					(i == 0 || j == 0 || i == god->map_size_y || j == god->map_size_x))
 					return 1;
 			}
 			else if (god->map[i][j] != '1' && god->map[i][j] != ' ')

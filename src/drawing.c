@@ -27,19 +27,19 @@ void draw_map(t_mlx_god*	god)
 	int j;
 
 	i = 0;
-	printf("%d, %d\n", god->size_x, god->size_y);
-	while (i < god->size_y)
+	printf("%d, %d\n", god->map_size_x, god->map_size_y);
+	while (i < god->map_size_y)
 	{
 		j = 0;
-		while (j < god->size_x)
+		while (j < god->map_size_x)
 		{
 			if (god->map[i][j] == '1')
 			{
-				print_rectangle(god, j * god->size_y, i * god->size_x, 64, 64, 0xFF0000);
+				print_rectangle(god, j * god->map_size_y, i * god->map_size_x, 64, 64, 0xFF0000);
 			}
 			if (god->map[i][j] == '0')
 			{
-				print_rectangle(god, j * god->size_y, i * god->size_x, 64, 64, 0xFFFF00);
+				print_rectangle(god, j * god->map_size_y, i * god->map_size_x, 64, 64, 0xFFFF00);
 			}
 			j++;
 		}
