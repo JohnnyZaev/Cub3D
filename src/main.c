@@ -51,8 +51,8 @@ void		ft_renhel(t_mlx_god *god)
 		god->txty = (int)((float)TAIL_SIZE / god->render->wallstrip * god->render->distancetop)
 					  & (TAIL_SIZE - 1);
 		if (god->render->i >= 0 && god->render->i < god->size_x && god->render->j >= 0 && god->render->j < god->size_y)
-//			god->img.data[(int)god->render->i + (int)god->render->j * g_file.width] =
-//					ft_tohex(g_file.ceilling.r, g_file.ceilling.g, g_file.ceilling.b);
+			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
+					god->c_color;
 		god->render->j++;
 	}
 }
@@ -76,8 +76,8 @@ void		ft_render3d(t_mlx_god *god)
 						  & (TAIL_SIZE - 1);
 			if (god->render->i >= 0 && god->render->i < god->size_x && god->render->j >= 0 &&
 					god->render->j < god->size_y)
-//				god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
-//						ft_tohex(g_file.floor.r, g_file.floor.g, g_file.floor.b);
+				god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
+						god->f_color;
 			god->render->j++;
 		}
 		god->render->i++;
