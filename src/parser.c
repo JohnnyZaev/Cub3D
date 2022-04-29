@@ -128,8 +128,8 @@ int	check_map(t_mlx_god* god)
 					god->player->angle = 0;
 				else if (god->map[i][j] == 'W')
 					god->player->angle = 180;
-				god->player->x = i * 10;
-				god->player->y = j * 10;
+				god->player->x = j * TAIL_SIZE;
+				god->player->y = i * TAIL_SIZE;
 			}
 			else if (god->map[i][j] == '0')
 			{
