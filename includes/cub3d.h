@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:23:25 by gvarys            #+#    #+#             */
-/*   Updated: 2022/04/13 15:14:35 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:38:28 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ typedef struct s_mlx_god
 	t_keys 		*keys;
 	t_draws 	*draws;
 	t_img		img;
-	t_rays 		rays[2550];
+	t_rays 		*rays;
 	t_render	*render;
 	int			txtx;
 	int			txty;

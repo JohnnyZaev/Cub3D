@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:21:46 by gvarys            #+#    #+#             */
-/*   Updated: 2022/04/13 16:45:16 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/04/29 15:38:13 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,10 @@ void		ft_renhel(t_mlx_god *god)
 		god->render->j++;
 	}
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 void		ft_render3d(t_mlx_god *god)
 {
+	printf("%p\n", god->render);
 	god->render->i = 0;
 	god->render->distpj = (god->size_x / 2) / (tan((30 * CONV)));
 	while (god->render->i < god->size_x)
@@ -83,7 +84,7 @@ void		ft_render3d(t_mlx_god *god)
 		god->render->i++;
 	}
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 float	ft_norm(float rayang)
 {
 	rayang = remainder(rayang, 2 * PI);
@@ -183,6 +184,7 @@ void		drawrays(t_mlx_god *god)
 {
 	int		i;
 
+	printf("textures677 %p\n", god->render);
 	god->draws->fhwhit = 0;
 	god->draws->vwallhit = 0;
 	god->draws->rayang = (god->player->angle - 30) * (PI / 180);
@@ -190,7 +192,9 @@ void		drawrays(t_mlx_god *god)
 	while (++i < god->size_x)
 	{
 		ft_halfone(i, god);
+		printf("textures888 %p, %d\n", god->render, i);
 		ft_halftwo(i, god);
+		printf("textures999 %p\n", god->render);
 		god->draws->hdistnc = (god->draws->fhwhit) ? distance_bew_points(god->player->x, god->player->y,
 																		 god->draws->hwhitx, god->draws->hwhity) : INT32_MAX;
 		god->draws->vdistnc = (god->draws->vwallhit)
@@ -263,6 +267,7 @@ int		press(int key, t_keys *keys)
 
 int		game_loop(t_mlx_god *god)
 {
+	printf("textures %p\n", god->render);
 	if (god->keys->exit)
 	{
 		mlx_destroy_window(god->mlx, god->win);
@@ -300,8 +305,12 @@ int		game_loop(t_mlx_god *god)
 											  &god->img.bpp, &god->img.size_line, &god->img.endian);
 	god->x = 0;
 	god->y = 0;
+	printf("tll %p\n", god->render);
 	drawrays(god);
+	printf("textures4 %p\n", god->render);
+	///////////////////////////////////////////////////
 	ft_render3d(god);
+	///////////////////////////////////////////////////
 	mlx_put_image_to_window(god->mlx, god->win, god->img.img_ptr, 0, 0);
 	return (0);
 }
@@ -322,6 +331,7 @@ void	set_textures(t_mlx_god *god)
 	void	*img;
 	int		tab[5];
 
+	printf("textures %p\n", god->render);
 	god->img.img_ptr = mlx_new_image(god->mlx, god->size_x, god->size_y);
 	god->img.data = (int *)mlx_get_data_addr(god->img.img_ptr, &god->img.bpp,
 											  &god->img.size_line, &god->img.endian);
@@ -368,12 +378,15 @@ int	main(int argc, char **argv)
 	t_keys		keys;
 	t_draws 	draws;
 	t_render 	render;
-	int i = 0;
+	t_rays		*rays;
+	// int i = 0;
 
+	printf("%p\n", &render);
 	memset(&keys, false, sizeof(keys));
 	god.draws = &draws;
 	god.keys = &keys;
 	god.render = &render;
+	printf("%p\n", god.render);
 	if (argc != 2)
 	{
 		printf("forgot something\n");
@@ -381,14 +394,16 @@ int	main(int argc, char **argv)
 	}
 	ft_init(&god, &player);
 	parser(&god, argv[1]);
-	if (god.map)
-	{
-		while (god.map[i])
-			printf("%s\n", god.map[i++]);
-	}
-	printf("floor - %d\nceilling - %d\n", god.f_color, god.c_color);
-	printf("textures:\n%s\n%s\n%s\n", god.textures[0], god.textures[1], god.textures[3]);
+	// if (god.map)
+	// {
+	// 	while (god.map[i])
+	// 		printf("%s\n", god.map[i++]);
+	// }
+	// printf("floor - %d\nceilling - %d\n", god.f_color, god.c_color);
+	// printf("textures:\n%s\n%s\n%s\n", god.textures[0], god.textures[1], god.textures[3]);
 	mlx_get_screen_size(&god.size_x, &god.size_y);
+	rays = malloc(sizeof(t_rays) * god.size_x);
+	god.rays = rays;
 	god.mlx = mlx_init();
 	god.win = mlx_new_window(god.mlx, god.size_x, god.size_y, "Cub3D");
 	set_textures(&god);
