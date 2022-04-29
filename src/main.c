@@ -59,7 +59,6 @@ void		ft_renhel(t_mlx_god *god)
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 void		ft_render3d(t_mlx_god *god)
 {
-	printf("%p\n", god->render);
 	god->render->i = 0;
 	god->render->distpj = (god->size_x / 2) / (tan((30 * CONV)));
 	while (god->render->i < god->size_x)
@@ -184,7 +183,6 @@ void		drawrays(t_mlx_god *god)
 {
 	int		i;
 
-	printf("textures677 %p\n", god->render);
 	god->draws->fhwhit = 0;
 	god->draws->vwallhit = 0;
 	god->draws->rayang = (god->player->angle - 30) * (PI / 180);
@@ -192,9 +190,7 @@ void		drawrays(t_mlx_god *god)
 	while (++i < god->size_x)
 	{
 		ft_halfone(i, god);
-		printf("textures888 %p, %d\n", god->render, i);
 		ft_halftwo(i, god);
-		printf("textures999 %p\n", god->render);
 		god->draws->hdistnc = (god->draws->fhwhit) ? distance_bew_points(god->player->x, god->player->y,
 																		 god->draws->hwhitx, god->draws->hwhity) : INT32_MAX;
 		god->draws->vdistnc = (god->draws->vwallhit)
@@ -267,7 +263,6 @@ int		press(int key, t_keys *keys)
 
 int		game_loop(t_mlx_god *god)
 {
-	printf("textures %p\n", god->render);
 	if (god->keys->exit)
 	{
 		mlx_destroy_window(god->mlx, god->win);
@@ -282,7 +277,6 @@ int		game_loop(t_mlx_god *god)
 	{
 		god->player->x += cos((god->player->angle + 90) * (PI / 180)) * god->player->speed;
 		god->player->y += sin((god->player->angle + 90) * (PI / 180)) * god->player->speed;
-		printf("%f - %f\n", god->player->x, god->player->y);
 	}
 	if (god->keys->back)
 	{
@@ -305,9 +299,7 @@ int		game_loop(t_mlx_god *god)
 											  &god->img.bpp, &god->img.size_line, &god->img.endian);
 	god->x = 0;
 	god->y = 0;
-	printf("tll %p\n", god->render);
 	drawrays(god);
-	printf("textures4 %p\n", god->render);
 	///////////////////////////////////////////////////
 	ft_render3d(god);
 	///////////////////////////////////////////////////
