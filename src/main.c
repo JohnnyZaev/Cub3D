@@ -211,7 +211,6 @@ void		drawrays(t_mlx_god *god)
 int		ecs(t_mlx_god *god)
 {
 	mlx_destroy_window(god->mlx, god->win);
-	printf("someshit\n");
 	exit(0);
 }
 
@@ -323,7 +322,6 @@ void	set_textures(t_mlx_god *god)
 	void	*img;
 	int		tab[5];
 
-	printf("textures %p\n", god->render);
 	god->img.img_ptr = mlx_new_image(god->mlx, god->size_x, god->size_y);
 	god->img.data = (int *)mlx_get_data_addr(god->img.img_ptr, &god->img.bpp,
 											  &god->img.size_line, &god->img.endian);
@@ -371,28 +369,18 @@ int	main(int argc, char **argv)
 	t_draws 	draws;
 	t_render 	render;
 	t_rays		*rays;
-	// int i = 0;
 
-	printf("%p\n", &render);
 	memset(&keys, false, sizeof(keys));
 	god.draws = &draws;
 	god.keys = &keys;
 	god.render = &render;
-	printf("%p\n", god.render);
 	if (argc != 2)
 	{
 		printf("forgot something\n");
-		return 1;
+		return (1);
 	}
 	ft_init(&god, &player);
 	parser(&god, argv[1]);
-	// if (god.map)
-	// {
-	// 	while (god.map[i])
-	// 		printf("%s\n", god.map[i++]);
-	// }
-	// printf("floor - %d\nceilling - %d\n", god.f_color, god.c_color);
-	// printf("textures:\n%s\n%s\n%s\n", god.textures[0], god.textures[1], god.textures[3]);
 	mlx_get_screen_size(&god.size_x, &god.size_y);
 	rays = malloc(sizeof(t_rays) * god.size_x);
 	god.rays = rays;

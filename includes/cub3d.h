@@ -24,6 +24,7 @@
 # include "../minilibx_opengl/mlx.h"
 # include "../libft/libft.h"
 
+//TODO delete unused variables
 # define TAIL_SIZE	64
 # define NOSE_SIZE	64
 # define PI			3.14159265359
@@ -69,6 +70,7 @@ typedef struct		s_img
 	int			endian;
 }					t_img;
 
+//TODO convert floats to doubles
 typedef struct		s_draws
 {
 	int		tocheck;
@@ -138,6 +140,7 @@ typedef struct s_mlx_god
 	int			txty;
 } t_mlx_god;
 
+//TODO create folders and topics for header
 int			errors(int err);
 int			ecs(t_mlx_god *god);
 int			press(int key, t_keys *keys);
@@ -146,13 +149,6 @@ double		distance_bew_points(float x, float y, float xd, float yd);
 void		drawrays(t_mlx_god *god);
 int			ft_iswal(float y, float x, t_mlx_god *god);
 float		ft_norm(float rayang);
-
-// drawing.c
-void	print_player_dot(t_player*	player, t_mlx_god*	god);
-void	print_rectangle(t_mlx_god*	god, int id_x, int id_y, int width, int heith, int colour);
-void	draw_map(t_mlx_god*	god);
-void	print_line(t_mlx_god*	god, int id_x, int id_y, int end_x, int end_y);
-void	print_player_ray(t_mlx_god*	god, t_player* player);
 
 // parser.c
 void	parser(t_mlx_god* god, char *file_name);

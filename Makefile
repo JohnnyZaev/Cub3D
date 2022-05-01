@@ -31,10 +31,9 @@ MLX					=	$(MLX_DIR)libmlx.a
 MLX_FLAGS			=	-lmlx -framework OpenGL -framework AppKit -lz
 
 SRC_FILES			=	main.c\
-						drawing.c\
 						parser.c\
 						parser_element_part.c\
-						ft_clean.c
+						ft_clean.c\
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 
