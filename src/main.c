@@ -12,6 +12,7 @@
 
 #include "cub3d.h"
 
+//TODO fix for norm
 void		ft_renha(t_mlx_god *god)
 {
 	god->render->distancetop = god->render->j - god->render->top;
@@ -230,10 +231,6 @@ int		unpress(int key, t_keys *keys)
 		keys->back = false;
 	if (key == UP)
 		keys->forward = false;
-	if (key == 126)
-		keys->up = false;
-	if (key == 125)
-		keys->down = false;
 	return (0);
 }
 
@@ -253,10 +250,6 @@ int		press(int key, t_keys *keys)
 		keys->back = true;
 	if (key == UP)
 		keys->forward = true;
-	if (key == 126)
-		keys->up = true;
-	if (key == 125)
-		keys->down = true;
 	return (0);
 }
 
@@ -296,8 +289,6 @@ int		game_loop(t_mlx_god *god)
 	god->img.img_ptr = mlx_new_image(god->mlx, god->size_x, god->size_y);
 	god->img.data = (int *)mlx_get_data_addr(god->img.img_ptr,
 											  &god->img.bpp, &god->img.size_line, &god->img.endian);
-	god->x = 0;
-	god->y = 0;
 	drawrays(god);
 	///////////////////////////////////////////////////
 	ft_render3d(god);

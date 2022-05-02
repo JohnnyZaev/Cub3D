@@ -26,7 +26,6 @@
 
 //TODO delete unused variables
 # define TAIL_SIZE	64
-# define NOSE_SIZE	64
 # define PI			3.14159265359
 # define CONV		(PI/180)
 # define INV       (180/PI)
@@ -34,8 +33,8 @@
 # define DOWN 1
 # define LEFT 0
 # define RIGHT 2
-# define RC_ROTATE 12
-# define CL_ROTATE 14
+# define RC_ROTATE 123
+# define CL_ROTATE 124
 # define RESET 15
 # define ESC 53
 
@@ -56,8 +55,6 @@ typedef struct		s_keys
 	bool		left;
 	bool		rightr;
 	bool		leftr;
-	bool		up;
-	bool		down;
 	bool		exit;
 }					t_keys;
 
@@ -70,55 +67,52 @@ typedef struct		s_img
 	int			endian;
 }					t_img;
 
-//TODO convert floats to doubles
 typedef struct		s_draws
 {
 	int		tocheck;
-	float	rayang;
-	float	xsps;
-	float	ysps;
-	float	xint;
-	float	yint;
-	float	nhorx;
-	float	nhory;
-	float	hwhitx;
-	float	hwhity;
+	double	rayang;
+	double	xsps;
+	double	ysps;
+	double	xint;
+	double	yint;
+	double	nhorx;
+	double	nhory;
+	double	hwhitx;
+	double	hwhity;
 	int		fhwhit;
 	int		vwallhit;
-	float	hdistnc;
-	float	vdistnc;
-	float	vwhitx;
-	float	vwhity;
+	double	hdistnc;
+	double	vdistnc;
+	double	vwhitx;
+	double	vwhity;
 }					t_draws;
 
 typedef struct		s_rays
 {
-	float	wallhx;
-	float	wallhy;
+	double	wallhx;
+	double	wallhy;
 	int		down;
 	int		up;
 	int		right;
 	int		left;
 	int		hitvert;
-	float	distance;
-	float	angle;
+	double	distance;
+	double	angle;
 }					t_rays;
 
 typedef struct		s_render {
-	float raydist;
-	float distpj;
-	float wallstrip;
-	float top;
-	float distancetop;
-	float bottom;
+	double raydist;
+	double distpj;
+	double wallstrip;
+	double top;
+	double distancetop;
+	double bottom;
 	int i;
-	float j;
+	double j;
 }					t_render;
 
 typedef struct s_mlx_god
 {
-	double 		x;
-	double 		y;
 	void		*mlx;
 	void		*win;
 	t_player	*player;
