@@ -24,18 +24,14 @@
 # include "../minilibx_opengl/mlx.h"
 # include "../libft/libft.h"
 
-//TODO delete unused variables
 # define TAIL_SIZE	64
-# define PI			3.14159265359
-# define CONV		(PI/180)
-# define INV       (180/PI)
+# define CONV		(M_PI/180)
 # define UP 13
 # define DOWN 1
 # define LEFT 0
 # define RIGHT 2
 # define RC_ROTATE 123
 # define CL_ROTATE 124
-# define RESET 15
 # define ESC 53
 
 typedef struct s_player

@@ -87,8 +87,8 @@ void		ft_render3d(t_mlx_god *god)
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 float	ft_norm(float rayang)
 {
-	rayang = remainder(rayang, 2 * PI);
-	rayang += rayang < 0 ? 2 * PI : 0;
+	rayang = remainder(rayang, 2 * M_PI);
+	rayang += rayang < 0 ? 2 * M_PI : 0;
 	return (rayang);
 }
 
@@ -134,10 +134,10 @@ void		ft_halfone(int i, t_mlx_god *god)
 	god->draws->fhwhit = 0;
 	god->draws->vwallhit = 0;
 	god->draws->rayang = ft_norm(god->draws->rayang);
-	god->rays[i].down = (god->draws->rayang > 0) && (god->draws->rayang < PI);
+	god->rays[i].down = (god->draws->rayang > 0) && (god->draws->rayang < M_PI);
 	god->rays[i].up = !god->rays[i].down;
-	god->rays[i].right = (god->draws->rayang < (0.5 * PI)) ||
-					  (god->draws->rayang > 1.5 * PI);
+	god->rays[i].right = (god->draws->rayang < (0.5 * M_PI)) ||
+					  (god->draws->rayang > 1.5 * M_PI);
 	god->rays[i].left = !god->rays[i].right;
 	god->draws->tocheck = god->rays[i].up ? 1 : 0;
 	god->draws->yint = floor((god->player->y / TAIL_SIZE)) * TAIL_SIZE;
@@ -186,7 +186,7 @@ void		drawrays(t_mlx_god *god)
 
 	god->draws->fhwhit = 0;
 	god->draws->vwallhit = 0;
-	god->draws->rayang = (god->player->angle - 30) * (PI / 180);
+	god->draws->rayang = (god->player->angle - 30) * (M_PI / 180);
 	i = -1;
 	while (++i < god->size_x)
 	{
@@ -205,7 +205,7 @@ void		drawrays(t_mlx_god *god)
 							 god->draws->hdistnc : god->draws->vdistnc;
 		god->rays[i].angle = god->draws->rayang;
 		god->rays[i].hitvert = (god->draws->vdistnc < god->draws->hdistnc);
-		god->draws->rayang += (60 * (PI / 180)) / god->size_x;
+		god->draws->rayang += (60 * (M_PI / 180)) / god->size_x;
 	}
 }
 
@@ -262,23 +262,23 @@ int		game_loop(t_mlx_god *god)
 	}
 	if (god->keys->left)
 	{
-		god->player->x -= cos((god->player->angle + 90) * (PI / 180)) * god->player->speed;
-		god->player->y -= sin((god->player->angle + 90) * (PI / 180)) * god->player->speed;
+		god->player->x -= cos((god->player->angle + 90) * (M_PI / 180)) * god->player->speed;
+		god->player->y -= sin((god->player->angle + 90) * (M_PI / 180)) * god->player->speed;
 	}
 	if (god->keys->right)
 	{
-		god->player->x += cos((god->player->angle + 90) * (PI / 180)) * god->player->speed;
-		god->player->y += sin((god->player->angle + 90) * (PI / 180)) * god->player->speed;
+		god->player->x += cos((god->player->angle + 90) * (M_PI / 180)) * god->player->speed;
+		god->player->y += sin((god->player->angle + 90) * (M_PI / 180)) * god->player->speed;
 	}
 	if (god->keys->back)
 	{
-		god->player->x -= cos((god->player->angle) * (PI / 180)) * god->player->speed;
-		god->player->y -= sin((god->player->angle) * (PI / 180)) * god->player->speed;
+		god->player->x -= cos((god->player->angle) * (M_PI / 180)) * god->player->speed;
+		god->player->y -= sin((god->player->angle) * (M_PI / 180)) * god->player->speed;
 	}
 	if (god->keys->forward)
 	{
-		god->player->x += cos((god->player->angle) * (PI / 180)) * god->player->speed;
-		god->player->y += sin((god->player->angle) * (PI / 180)) * god->player->speed;
+		god->player->x += cos((god->player->angle) * (M_PI / 180)) * god->player->speed;
+		god->player->y += sin((god->player->angle) * (M_PI / 180)) * god->player->speed;
 	}
 	if (god->keys->rightr)
 		god->player->angle -= 3;
