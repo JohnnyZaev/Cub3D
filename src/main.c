@@ -16,7 +16,7 @@
 void		ft_renha(t_mlx_god *god)
 {
 	god->render->distancetop = god->render->j - god->render->top;
-	god->txty = (god->render->distancetop) * ((float)TAIL_SIZE / god->render->wallstrip);
+	god->txty = (int)(god->render->distancetop * ((float) TAIL_SIZE / god->render->wallstrip));
 	if (god->render->i >= 0 && god->render->i < god->size_x && god->render->j >= 0 && god->render->j < god->size_y)
 	{
 		if (god->rays[god->render->i].hitvert && god->rays[god->render->i].right)
@@ -37,9 +37,9 @@ void		ft_renha(t_mlx_god *god)
 void		ft_renhel(t_mlx_god *god)
 {
 	god->render->raydist = god->rays[god->render->i].distance *
-				cosf(god->rays[god->render->i].angle - (god->player->angle * CONV));
+				cos(god->rays[god->render->i].angle - (god->player->angle * CONV));
 	god->render->wallstrip = (TAIL_SIZE / god->render->raydist) * god->render->distpj;
-	god->render->top = (god->size_y / 2) - (god->render->wallstrip / 2);
+	god->render->top = ((float)god->size_y / 2) - (god->render->wallstrip / 2);
 	god->render->bottom = god->render->top + god->render->wallstrip;
 	god->render->j = 0;
 	if (god->rays[god->render->i].hitvert)
@@ -57,11 +57,11 @@ void		ft_renhel(t_mlx_god *god)
 		god->render->j++;
 	}
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////
+
 void		ft_render3d(t_mlx_god *god)
 {
 	god->render->i = 0;
-	god->render->distpj = (god->size_x / 2) / (tan((30 * CONV)));
+	god->render->distpj = ((float)god->size_x / 2) / (tan((30 * CONV)));
 	while (god->render->i < god->size_x)
 	{
 		ft_renhel(god);
@@ -84,18 +84,18 @@ void		ft_render3d(t_mlx_god *god)
 		god->render->i++;
 	}
 }
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-float	ft_norm(float rayang)
+
+double	ft_norm(double rayang)
 {
 	rayang = remainder(rayang, 2 * M_PI);
 	rayang += rayang < 0 ? 2 * M_PI : 0;
 	return (rayang);
 }
 
-int		ft_iswal(float y, float x, t_mlx_god *god)
+int		ft_is_wall(double y, double x, t_mlx_god *god)
 {
-	if (x >= 0 && x < god->map_size_x * TAIL_SIZE && y >= 0 &&
-		y < god->map_size_y * TAIL_SIZE)
+	if (x >= 0 && x < (float)god->map_size_x * TAIL_SIZE && y >= 0 &&
+		y < (float)god->map_size_y * TAIL_SIZE)
 	{
 		if (god->map[(int)y / TAIL_SIZE][(int)x / TAIL_SIZE] != '1')
 			return (1);
@@ -103,18 +103,18 @@ int		ft_iswal(float y, float x, t_mlx_god *god)
 	return (0);
 }
 
-double		distance_bew_points(float x, float y, float xd, float yd)
+double		distance_bew_points(double x, double y, double xd, double yd)
 {
 	return (sqrt(pow((xd - x), 2) + pow(yd - y, 2)));
 }
 
-void		ft_helpone(t_mlx_god *god)
+void		ft_help_one(t_mlx_god *god)
 {
 	while (god->draws->nhorx >= 0 && god->draws->nhorx <= god->map_size_x * TAIL_SIZE &&
 			god->draws->nhory >= 0 && god->draws->nhory <= god->map_size_y * TAIL_SIZE)
 	{
-		if (!(ft_iswal(god->draws->nhory -
-							   god->draws->tocheck, god->draws->nhorx, god)))
+		if (!(ft_is_wall(god->draws->nhory -
+						 god->draws->tocheck, god->draws->nhorx, god)))
 		{
 			god->draws->fhwhit = 1;
 			god->draws->hwhitx = god->draws->nhorx;
@@ -148,7 +148,7 @@ void		ft_halfone(int i, t_mlx_god *god)
 	god->draws->xsps = god->draws->ysps / tan(god->draws->rayang);
 	god->draws->nhorx = god->draws->xint;
 	god->draws->nhory = god->draws->yint;
-	ft_helpone(god);
+	ft_help_one(god);
 }
 
 void		ft_halftwo(int i, t_mlx_god *god)
@@ -165,7 +165,7 @@ void		ft_halftwo(int i, t_mlx_god *god)
 	while (god->draws->nhorx >= 0 && god->draws->nhorx <= god->map_size_x * TAIL_SIZE &&
 			god->draws->nhory >= 0 && god->draws->nhory <= god->map_size_y * TAIL_SIZE)
 	{
-		if (!(ft_iswal(god->draws->nhory, god->draws->nhorx - god->draws->tocheck, god)))
+		if (!(ft_is_wall(god->draws->nhory, god->draws->nhorx - god->draws->tocheck, god)))
 		{
 			god->draws->vwallhit = 1;
 			god->draws->vwhitx = god->draws->nhorx;
@@ -290,9 +290,7 @@ int		game_loop(t_mlx_god *god)
 	god->img.data = (int *)mlx_get_data_addr(god->img.img_ptr,
 											  &god->img.bpp, &god->img.size_line, &god->img.endian);
 	drawrays(god);
-	///////////////////////////////////////////////////
 	ft_render3d(god);
-	///////////////////////////////////////////////////
 	mlx_put_image_to_window(god->mlx, god->win, god->img.img_ptr, 0, 0);
 	return (0);
 }
@@ -375,6 +373,8 @@ int	main(int argc, char **argv)
 	rays = malloc(sizeof(t_rays) * god.size_x);
 	god.rays = rays;
 	god.mlx = mlx_init();
+	if (!god.mlx)
+		errors(2);
 	god.win = mlx_new_window(god.mlx, god.size_x, god.size_y, "Cub3D");
 	set_textures(&god);
 	mlx_hook(god.win, 17, 0, ecs, &god);

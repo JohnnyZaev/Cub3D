@@ -134,10 +134,10 @@ int			errors(int err);
 int			ecs(t_mlx_god *god);
 int			press(int key, t_keys *keys);
 int			unpress(int key, t_keys *keys);
-double		distance_bew_points(float x, float y, float xd, float yd);
+double		distance_bew_points(double x, double y, double xd, double yd);
 void		drawrays(t_mlx_god *god);
-int			ft_iswal(float y, float x, t_mlx_god *god);
-float		ft_norm(float rayang);
+int			ft_is_wall(double y, double x, t_mlx_god *god);
+double		ft_norm(double rayang);
 
 // parser.c
 void	parser(t_mlx_god* god, char *file_name);
