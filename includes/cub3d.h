@@ -39,7 +39,6 @@ typedef struct s_player
 	double	x;
 	double	y;
 	double	angle;
-	int		v_range;
 	int		speed;
 }	t_player;
 

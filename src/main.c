@@ -348,7 +348,6 @@ void	ft_init(t_mlx_god*	god, t_player* player)
 	god->c_color = 0;
 	god->f_color = 0;
 	god->map = NULL;
-	player->v_range = 150;
 	player->speed = 5;
 }
 
