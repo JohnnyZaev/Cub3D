@@ -133,7 +133,7 @@ typedef struct s_mlx_god
 int			errors(int err);
 int			ecs(t_mlx_god *god);
 int			press(int key, t_keys *keys);
-int			unpress(int key, t_keys *keys);
+int			unhold(int key, t_keys *keys);
 double		distance_bew_points(double x, double y, double xd, double yd);
 void		drawrays(t_mlx_god *god);
 int			ft_is_wall(double y, double x, t_mlx_god *god);

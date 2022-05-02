@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 //TODO fix for norm
-void		ft_renha(t_mlx_god *god)
+void		renha(t_mlx_god *god)
 {
 	god->render->distancetop = god->render->j - god->render->top;
 	god->txty = (int)(god->render->distancetop * ((float) TAIL_SIZE / god->render->wallstrip));
@@ -34,7 +34,7 @@ void		ft_renha(t_mlx_god *god)
 	}
 }
 
-void		ft_renhel(t_mlx_god *god)
+void		renhel(t_mlx_god *god)
 {
 	god->render->raydist = god->rays[god->render->i].distance *
 				cos(god->rays[god->render->i].angle - (god->player->angle * CONV));
@@ -58,16 +58,16 @@ void		ft_renhel(t_mlx_god *god)
 	}
 }
 
-void		ft_render3d(t_mlx_god *god)
+void		render3d(t_mlx_god *god)
 {
 	god->render->i = 0;
 	god->render->distpj = ((float)god->size_x / 2) / (tan((30 * CONV)));
 	while (god->render->i < god->size_x)
 	{
-		ft_renhel(god);
+		renhel(god);
 		while (god->render->j < god->render->bottom)
 		{
-			ft_renha(god);
+			renha(god);
 			god->render->j++;
 		}
 		while (god->render->j < god->size_y)
@@ -215,7 +215,7 @@ int		ecs(t_mlx_god *god)
 	exit(0);
 }
 
-int		unpress(int key, t_keys *keys)
+int		unhold(int key, t_keys *keys)
 {
 	if (key == ESC)
 		keys->exit = false;
@@ -290,7 +290,7 @@ int		game_loop(t_mlx_god *god)
 	god->img.data = (int *)mlx_get_data_addr(god->img.img_ptr,
 											  &god->img.bpp, &god->img.size_line, &god->img.endian);
 	drawrays(god);
-	ft_render3d(god);
+	render3d(god);
 	mlx_put_image_to_window(god->mlx, god->win, god->img.img_ptr, 0, 0);
 	return (0);
 }
@@ -379,7 +379,7 @@ int	main(int argc, char **argv)
 	set_textures(&god);
 	mlx_hook(god.win, 17, 0, ecs, &god);
 	mlx_hook(god.win, 2, 0, press, (&god)->keys);
-	mlx_hook(god.win, 3, 0, unpress, (&god)->keys);
+	mlx_hook(god.win, 3, 0, unhold, (&god)->keys);
 	mlx_loop_hook(god.mlx, game_loop, &god);
 	mlx_loop(god.mlx);
 }
