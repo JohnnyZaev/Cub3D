@@ -80,7 +80,7 @@ void fill_map(t_mlx_god* god, char *file_name)
 	char	*str;
 	int		fd;
 	int		i = 0;
-	int		j = 0;
+	int		j;
 
 	fd = open(file_name, O_RDONLY, 0644);
 	str = get_next_line(fd);
@@ -106,7 +106,7 @@ void fill_map(t_mlx_god* god, char *file_name)
 int	check_map(t_mlx_god* god)
 {
 	int i = 0;
-	int j = 0;
+	int j;
 	int flag = 0;
 
 	while (god->map[i])

@@ -15,7 +15,7 @@
 static int parse_color(t_mlx_god* god, char *str, char flag)
 {
 	char	*buf;
-	int		i;
+	size_t	i;
 	int		j;
 
 	i = 0;
@@ -37,7 +37,7 @@ static int parse_color(t_mlx_god* god, char *str, char flag)
 			god->f_color *= 256;
 			god->f_color += ft_atoi(buf);
 		}
-		else if (flag == 1)
+		else
 		{
 			god->c_color *= 256;
 			god->c_color += ft_atoi(buf);
@@ -46,7 +46,6 @@ static int parse_color(t_mlx_god* god, char *str, char flag)
 			i++;
 		i += ft_strlen(buf);
 		free(buf);
-		buf = &str[i];
 		while (str[i] == ' ')
 			i++;
 		if ((str[i] != ',' && j != 2) || (j == 2 && str[i] != '\n'))
@@ -83,7 +82,7 @@ static int get_color(t_mlx_god* god, char *flags, int i, char *str)
 	*flags = 1;
 	while (str[2 + sp] == ' ')
 		sp++;
-	if (parse_color(god, &str[2 + sp], i))
+	if (parse_color(god, &str[2 + sp], (char)i))
 	{
 		free(str);
 		return (1);
@@ -102,7 +101,7 @@ int	parse_textures_and_color(t_mlx_god* god, char *file_name, int *fd)
 	str = get_next_line(*fd);
 	if (!str)
 		return (1);
-	while (str)
+	while (true)
 	{
 		if (!ft_strncmp(str, "NO ", 3))
 		{
