@@ -25,7 +25,6 @@
 # include "../libft/libft.h"
 
 # define TAIL_SIZE	64
-# define CONV		(M_PI/180)
 # define UP 13
 # define DOWN 1
 # define LEFT 0
@@ -42,7 +41,7 @@ typedef struct s_player
 	int		speed;
 }	t_player;
 
-typedef struct		s_keys
+typedef struct s_keys
 {
 	bool		forward;
 	bool		back;
@@ -53,7 +52,7 @@ typedef struct		s_keys
 	bool		exit;
 }					t_keys;
 
-typedef struct		s_img
+typedef struct s_img
 {
 	void		*img_ptr;
 	int			*data;
@@ -62,7 +61,7 @@ typedef struct		s_img
 	int			endian;
 }					t_img;
 
-typedef struct		s_draws
+typedef struct s_draws
 {
 	int		tocheck;
 	double	rayang;
@@ -82,7 +81,7 @@ typedef struct		s_draws
 	double	vwhity;
 }					t_draws;
 
-typedef struct		s_rays
+typedef struct s_rays
 {
 	double	wallhx;
 	double	wallhy;
@@ -95,16 +94,16 @@ typedef struct		s_rays
 	double	angle;
 }					t_rays;
 
-typedef struct		s_render {
-	double raydist;
-	double distpj;
-	double wallstrip;
-	double top;
-	double distancetop;
-	double bottom;
-	int i;
-	double j;
-}					t_render;
+typedef struct s_render {
+	double	raydist;
+	double	distpj;
+	double	wallstrip;
+	double	top;
+	double	distancetop;
+	double	bottom;
+	int		i;
+	double	j;
+}				t_render;
 
 typedef struct s_mlx_god
 {
@@ -119,15 +118,15 @@ typedef struct s_mlx_god
 	int			f_color;
 	int			c_color;
 	char		*textures[4];
-	int 		*texturep[4];
-	t_keys 		*keys;
-	t_draws 	*draws;
+	int			*texturep[4];
+	t_keys		*keys;
+	t_draws		*draws;
 	t_img		img;
-	t_rays 		*rays;
+	t_rays		*rays;
 	t_render	*render;
 	int			txtx;
 	int			txty;
-} t_mlx_god;
+}				t_mlx_god;
 
 //TODO create folders and topics for header
 int			errors(int err);
@@ -140,12 +139,11 @@ int			ft_is_wall(double y, double x, t_mlx_god *god);
 double		ft_norm(double rayang);
 
 // parser.c
-void	parser(t_mlx_god* god, char *file_name);
+void		parser(t_mlx_god *god, char *file_name);
 // parser_element_part.c
-int		parse_textures_and_color(t_mlx_god* god, char *file_name, int *fd);
+int			parse_textures_and_color(t_mlx_god *god, char *file_name, int *fd);
 
 // ft_clean.c
-void	ft_clean(t_mlx_god*	god, int mode);
-
+void		ft_clean(t_mlx_god *god, int mode);
 
 #endif

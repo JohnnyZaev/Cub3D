@@ -37,7 +37,7 @@ void		renha(t_mlx_god *god)
 void		renhel(t_mlx_god *god)
 {
 	god->render->raydist = god->rays[god->render->i].distance *
-				cos(god->rays[god->render->i].angle - (god->player->angle * CONV));
+				cos(god->rays[god->render->i].angle - (god->player->angle * (M_PI/180)));
 	god->render->wallstrip = (TAIL_SIZE / god->render->raydist) * god->render->distpj;
 	god->render->top = ((float)god->size_y / 2) - (god->render->wallstrip / 2);
 	god->render->bottom = god->render->top + god->render->wallstrip;
@@ -61,7 +61,7 @@ void		renhel(t_mlx_god *god)
 void		render3d(t_mlx_god *god)
 {
 	god->render->i = 0;
-	god->render->distpj = ((float)god->size_x / 2) / (tan((30 * CONV)));
+	god->render->distpj = ((float)god->size_x / 2) / (tan((30 * (M_PI/180))));
 	while (god->render->i < god->size_x)
 	{
 		renhel(god);
