@@ -85,11 +85,11 @@ void		render3d(t_mlx_god *god)
 	}
 }
 
-double	ft_norm(double rayang)
+double	ft_norm(double ray_ang)
 {
-	rayang = remainder(rayang, 2 * M_PI);
-	rayang += rayang < 0 ? 2 * M_PI : 0;
-	return (rayang);
+	ray_ang = remainder(ray_ang, 2 * M_PI);
+	ray_ang += ray_ang < 0 ? 2 * M_PI : 0;
+	return (ray_ang);
 }
 
 int		ft_is_wall(double y, double x, t_mlx_god *god)

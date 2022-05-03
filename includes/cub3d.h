@@ -136,7 +136,7 @@ int			unhold(int key, t_keys *keys);
 double		distance_bew_points(double x, double y, double xd, double yd);
 void		drawrays(t_mlx_god *god);
 int			ft_is_wall(double y, double x, t_mlx_god *god);
-double		ft_norm(double rayang);
+double		ft_norm(double ray_ang);
 
 // parser.c
 void		parser(t_mlx_god *god, char *file_name);
