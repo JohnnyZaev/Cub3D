@@ -48,7 +48,7 @@ $(MLX)				:
 $(NAME)				:	$(OBJS)
 							$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) $(LIBFT_FLAGS) -L$(MLX_DIR) $(MLX_FLAGS) -o $@
 
-%.o					:	%.c $(HEADER)
+%.o					:	%.c $(HEADER) Makefile
 							$(CC) $(CFLAGS) -I$(HEADER_DIR) -I$(MLX_DIR) -c $< -o $@
 
 clean				:
