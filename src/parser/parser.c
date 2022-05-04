@@ -6,17 +6,19 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 13:21:56 by ereginia          #+#    #+#             */
-/*   Updated: 2022/04/13 17:04:49 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/05/04 17:04:54 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int find_symbols(const char *str, const char *find)
+static int	find_symbols(const char *str, const char *find)
 {
-	int i = 0;
-	int j = 0;
+	int	i;
+	int	j;
 
+	i = 0;
+	j = 0;
 	if (str[0] == '\n')
 		return (1);
 	while (str[i])
@@ -28,7 +30,7 @@ static int find_symbols(const char *str, const char *find)
 				j++;
 				if (j == (int)ft_strlen(find))
 					return (1);
-				continue;
+				continue ;
 			}
 			i++;
 			j = 0;
@@ -38,10 +40,25 @@ static int find_symbols(const char *str, const char *find)
 	return (0);
 }
 
-int room_for_map(t_mlx_god* god, char *file_name)
+static void	room_creation(t_mlx_god *god)
+{
+	int	i;
+
+	god->map = (char **)malloc(sizeof(char *) * god->map_size_y + 1);
+	i = 0;
+	while (i < god->map_size_y)
+	{
+		god->map[i] = (char *)malloc(sizeof(char) * (god->map_size_x + 1));
+		ft_memset(god->map[i], ' ', sizeof(char) * (god->map_size_x + 1));
+		god->map[i][god->map_size_x] = '\0';
+		i++;
+	}
+	god->map[i] = NULL;
+}
+
+int	room_for_map(t_mlx_god *god, char *file_name)
 {
 	int		fd;
-	int		i = 0;
 	char	*str;
 
 	if (parse_textures_and_color(god, file_name, &fd))
@@ -62,24 +79,16 @@ int room_for_map(t_mlx_god* god, char *file_name)
 		free(str);
 		str = get_next_line(fd);
 	}
-	god->map = (char **)malloc(sizeof(char *) * god->map_size_y + 1);
-	while (i < god->map_size_y)
-	{
-		god->map[i] = (char *)malloc(sizeof(char) * (god->map_size_x + 1));
-		ft_memset(god->map[i], ' ', sizeof(char) * (god->map_size_x + 1));
-		god->map[i][god->map_size_x] = '\0';
-		i++;
-	}
-	god->map[i] = NULL;
+	room_creation(god);
 	close(fd);
 	return (0);
 }
 
-void fill_map(t_mlx_god* god, char *file_name)
+void	fill_map(t_mlx_god *god, char *file_name)
 {
 	char	*str;
 	int		fd;
-	int		i = 0;
+	int		i;
 	int		j;
 
 	fd = open(file_name, O_RDONLY, 0644);
@@ -89,6 +98,7 @@ void fill_map(t_mlx_god* god, char *file_name)
 		free(str);
 		str = get_next_line(fd);
 	}
+	i = 0;
 	while (str)
 	{
 		j = 0;
@@ -103,56 +113,18 @@ void fill_map(t_mlx_god* god, char *file_name)
 	}
 }
 
-int	check_map(t_mlx_god* god)
+void	parser(t_mlx_god *god, char *file_name)
 {
-	int i = 0;
-	int j;
-	int flag = 0;
+	char	*buf;
 
-	while (god->map[i])
+	buf = ft_substr(file_name, ft_strlen(file_name) - 4, 4);
+	if (ft_strncmp(buf, ".cub", 4))
 	{
-		j = 0;
-		while (god->map[i][j])
-		{
-			if (god->map[i][j] == 'N' || god->map[i][j] == 'S'
-					|| god->map[i][j] == 'E' || god->map[i][j] == 'W')
-			{
-				if (flag == 1)
-					return (1);
-				flag = 1;
-				if (god->map[i][j] == 'N')
-					god->player->angle =  270;
-				else if (god->map[i][j] == 'S')
-					god->player->angle =  90;
-				else if (god->map[i][j] == 'E')
-					god->player->angle = 0;
-				else if (god->map[i][j] == 'W')
-					god->player->angle = 180;
-				god->player->x = j * TAIL_SIZE;
-				god->player->y = i * TAIL_SIZE;
-			}
-			else if (god->map[i][j] == '0')
-			{
-				if ((i > 0 && god->map[i - 1][j] == ' ') || \
-					(i < god->map_size_x &&  god->map[i + 1][j] == ' ') || \
-					(j > 0 && god->map[i][j - 1] == ' ') || \
-					(j < god->map_size_y && god->map[i][j + 1] == ' ') || \
-					(i == 0 || j == 0 || i == god->map_size_y || j == god->map_size_x))
-					return 1;
-			}
-			else if (god->map[i][j] != '1' && god->map[i][j] != ' ')
-				return 1;
-			j++;
-		}
-		i++;
+		printf("error: map.cub extension\n");
+		free(buf);
+		return ;
 	}
-	if (!flag)
-		return 1;
-	return 0;
-}
-
-void	parser(t_mlx_god* god, char *file_name)
-{
+	free(buf);
 	if (room_for_map(god, file_name))
 	{
 		printf("error: invalid elements\n");
@@ -162,7 +134,7 @@ void	parser(t_mlx_god* god, char *file_name)
 	fill_map(god, file_name);
 	if (check_map(god))
 	{
-		printf("error: sorry but this map incorrect\n");
+		printf("error: sorry but this map.cub incorrect\n");
 		ft_clean(god, 3);
 	}
 }
