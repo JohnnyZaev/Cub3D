@@ -13,108 +13,14 @@
 #include "cub3d.h"
 
 //TODO fix for norm
-void		renha(t_mlx_god *god)
-{
-	god->render->distancetop = god->render->j - god->render->top;
-	god->txty = (int)(god->render->distancetop * ((float) TAIL_SIZE / god->render->wallstrip));
-	if (god->render->i >= 0 && god->render->i < god->size_x && god->render->j >= 0 && god->render->j < god->size_y)
-	{
-		if (god->rays[god->render->i].hitvert && god->rays[god->render->i].right)
-			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
-					(god->texturep[0][TAIL_SIZE * god->txty + god->txtx]);
-		if (god->rays[god->render->i].hitvert && god->rays[god->render->i].left)
-			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
-					god->texturep[1][TAIL_SIZE * god->txty + god->txtx];
-		if (!god->rays[god->render->i].hitvert && god->rays[god->render->i].up)
-			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
-					god->texturep[2][TAIL_SIZE * god->txty + god->txtx];
-		if (!god->rays[god->render->i].hitvert && god->rays[god->render->i].down)
-			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
-					god->texturep[3][TAIL_SIZE * god->txty + god->txtx];
-	}
-}
-
-void		renhel(t_mlx_god *god)
-{
-	god->render->raydist = god->rays[god->render->i].distance *
-				cos(god->rays[god->render->i].angle - (god->player->angle * (M_PI/180)));
-	god->render->wallstrip = (TAIL_SIZE / god->render->raydist) * god->render->distpj;
-	god->render->top = ((float)god->size_y / 2) - (god->render->wallstrip / 2);
-	god->render->bottom = god->render->top + god->render->wallstrip;
-	god->render->j = 0;
-	if (god->rays[god->render->i].hitvert)
-		god->txtx = ((int)god->rays[god->render->i].wallhy) % TAIL_SIZE;
-	else
-		god->txtx = ((int)god->rays[god->render->i].wallhx) % TAIL_SIZE;
-	while (god->render->j < god->render->top)
-	{
-		god->render->distancetop = god->render->j - god->render->top;
-		god->txty = (int)((float)TAIL_SIZE / god->render->wallstrip * god->render->distancetop)
-					  & (TAIL_SIZE - 1);
-		if (god->render->i >= 0 && god->render->i < god->size_x && god->render->j >= 0 && god->render->j < god->size_y)
-			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
-					god->c_color;
-		god->render->j++;
-	}
-}
-
-void		render3d(t_mlx_god *god)
-{
-	god->render->i = 0;
-	god->render->distpj = ((float)god->size_x / 2) / (tan((30 * (M_PI/180))));
-	while (god->render->i < god->size_x)
-	{
-		renhel(god);
-		while (god->render->j < god->render->bottom)
-		{
-			renha(god);
-			god->render->j++;
-		}
-		while (god->render->j < god->size_y)
-		{
-			god->render->distancetop = god->render->j - god->render->top;
-			god->txty = (int)((float)TAIL_SIZE / god->render->wallstrip * god->render->distancetop)
-						  & (TAIL_SIZE - 1);
-			if (god->render->i >= 0 && god->render->i < god->size_x && god->render->j >= 0 &&
-					god->render->j < god->size_y)
-				god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
-						god->f_color;
-			god->render->j++;
-		}
-		god->render->i++;
-	}
-}
-
-double	ft_norm(double ray_ang)
-{
-	ray_ang = remainder(ray_ang, 2 * M_PI);
-	ray_ang += ray_ang < 0 ? 2 * M_PI : 0;
-	return (ray_ang);
-}
-
-int		ft_is_wall(double y, double x, t_mlx_god *god)
-{
-	if (x >= 0 && x < (float)god->map_size_x * TAIL_SIZE && y >= 0 &&
-		y < (float)god->map_size_y * TAIL_SIZE)
-	{
-		if (god->map[(int)y / TAIL_SIZE][(int)x / TAIL_SIZE] != '1')
-			return (1);
-	}
-	return (0);
-}
-
-double		distance_bew_points(double x, double y, double xd, double yd)
-{
-	return (sqrt(pow((xd - x), 2) + pow(yd - y, 2)));
-}
 
 void		ft_help_one(t_mlx_god *god)
 {
 	while (god->draws->nhorx >= 0 && god->draws->nhorx <= god->map_size_x * TAIL_SIZE &&
 			god->draws->nhory >= 0 && god->draws->nhory <= god->map_size_y * TAIL_SIZE)
 	{
-		if (!(ft_is_wall(god->draws->nhory -
-						 god->draws->tocheck, god->draws->nhorx, god)))
+		if (!(is_wall(god->draws->nhory -
+					  god->draws->tocheck, god->draws->nhorx, god)))
 		{
 			god->draws->fhwhit = 1;
 			god->draws->hwhitx = god->draws->nhorx;
@@ -165,7 +71,7 @@ void		ft_halftwo(int i, t_mlx_god *god)
 	while (god->draws->nhorx >= 0 && god->draws->nhorx <= god->map_size_x * TAIL_SIZE &&
 			god->draws->nhory >= 0 && god->draws->nhory <= god->map_size_y * TAIL_SIZE)
 	{
-		if (!(ft_is_wall(god->draws->nhory, god->draws->nhorx - god->draws->tocheck, god)))
+		if (!(is_wall(god->draws->nhory, god->draws->nhorx - god->draws->tocheck, god)))
 		{
 			god->draws->vwallhit = 1;
 			god->draws->vwhitx = god->draws->nhorx;
@@ -315,22 +221,22 @@ void	set_textures(t_mlx_god *god)
 	god->img.data = (int *)mlx_get_data_addr(god->img.img_ptr, &god->img.bpp,
 											  &god->img.size_line, &god->img.endian);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[1], &tab[0], &tab[1]);
-	if (!img)
+	if (!img || !god->img.data)
 		ecs(god);
 	god->texturep[0] = (int *)mlx_get_data_addr(img,
 												 &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[3], &tab[0], &tab[1]);
-	if (!img)
+	if (!img || !god->img.data)
 		ecs(god);
 	god->texturep[1] = (int *)mlx_get_data_addr(img,
 												 &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[0], &tab[0], &tab[1]);
-	if (!img)
+	if (!img || !god->img.data)
 		ecs(god);
 	god->texturep[2] = (int *)mlx_get_data_addr(img,
 												 &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[2], &tab[0], &tab[1]);
-	if (!img)
+	if (!img || !god->img.data)
 		ecs(god);
 	god->texturep[3] = (int *)mlx_get_data_addr(img,
 												 &tab[2], &tab[3], &tab[4]);

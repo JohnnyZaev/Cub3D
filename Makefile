@@ -34,6 +34,8 @@ SRC_FILES			=	main.c\
 						parser/parser.c\
 						parser/parser_element_part.c\
 						utils/ft_clean.c\
+						utils/utils.c\
+						render/render.c\
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 
