@@ -1,14 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/25 15:21:46 by gvarys            #+#    #+#             */
+/*   Updated: 2022/04/29 15:38:13 by ereginia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static void		renha(t_mlx_god *god)
+static void	renha(t_mlx_god *god)
 {
 	god->render->distancetop = god->render->j - god->render->top;
-	god->txty = (int)(god->render->distancetop * ((float) TAIL_SIZE / god->render->wallstrip));
-	if (god->render->i >= 0 && god->render->i < god->size_x && god->render->j >= 0 && god->render->j < god->size_y)
+	god->txty = (int)(god->render->distancetop
+			* ((float) TAIL_SIZE / god->render->wallstrip));
+	if (god->render->i >= 0 && god->render->i < god->size_x
+		&& god->render->j >= 0 && god->render->j < god->size_y)
 	{
-		if (god->rays[god->render->i].hitvert && god->rays[god->render->i].right)
-			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
-					(god->texturep[0][TAIL_SIZE * god->txty + god->txtx]);
+		if (god->rays[god->render->i].hitvert
+			&& god->rays[god->render->i].right)
+			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x]
+			= (god->texturep[0][TAIL_SIZE * god->txty + god->txtx]);
 		if (god->rays[god->render->i].hitvert && god->rays[god->render->i].left)
 			god->img.data[(int)god->render->i + (int)god->render->j * god->size_x] =
 					god->texturep[1][TAIL_SIZE * god->txty + god->txtx];
