@@ -38,6 +38,7 @@ SRC_FILES			=	main.c\
 						utils/ft_clean.c\
 						utils/utils.c\
 						render/render.c\
+						drawrays/drawrays.c\
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 

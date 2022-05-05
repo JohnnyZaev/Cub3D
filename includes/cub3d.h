@@ -133,6 +133,8 @@ int			errors(int err);
 int			ecs(t_mlx_god *god);
 int			press(int key, t_keys *keys);
 int			unhold(int key, t_keys *keys);
+
+//drawrays.c
 void		drawrays(t_mlx_god *god);
 
 
