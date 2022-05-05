@@ -274,7 +274,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	ft_init(&god, &player);
-	parser(&god, argv[1]);
+	if (parser(&god, argv[1]))
+		return (1);
 	mlx_get_screen_size(&god.size_x, &god.size_y);
 	rays = malloc(sizeof(t_rays) * god.size_x);
 	god.rays = rays;

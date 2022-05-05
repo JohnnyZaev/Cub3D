@@ -33,6 +33,8 @@ MLX_FLAGS			=	-lmlx -framework OpenGL -framework AppKit -lz
 SRC_FILES			=	main.c\
 						parser/parser.c\
 						parser/parser_element_part.c\
+						parser/parse_color.c\
+						parser/check_map.c\
 						utils/ft_clean.c\
 						utils/utils.c\
 						render/render.c\

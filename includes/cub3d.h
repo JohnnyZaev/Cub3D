@@ -137,9 +137,18 @@ void		drawrays(t_mlx_god *god);
 
 
 // parser.c
-void		parser(t_mlx_god *god, char *file_name);
-// parser_element_part.c
+int			parser(t_mlx_god *god, char *file_name);
+// parser/check_map
+int			check_map(t_mlx_god *god);
+
+// parser/parser_element_part.c
 int			parse_textures_and_color(t_mlx_god *god, char *file_name, int *fd);
+
+// parser/parse_color.c
+int			get_color(t_mlx_god *god, char *flags, int i, char *str);
+int			write_to_textures_massive(t_mlx_god *god, char *flags, \
+				int i, char *str);
+
 // ft_clean.c
 void		ft_clean(t_mlx_god *god, int mode);
 //render.c
