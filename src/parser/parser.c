@@ -113,28 +113,31 @@ void	fill_map(t_mlx_god *god, char *file_name)
 	}
 }
 
-void	parser(t_mlx_god *god, char *file_name)
+int	parser(t_mlx_god *god, char *file_name)
 {
 	char	*buf;
 
-	buf = ft_substr(file_name, ft_strlen(file_name) - 4, 4);
-	if (ft_strncmp(buf, ".cub", 4))
-	{
-		printf("error: map.cub extension\n");
-		free(buf);
-		return ;
-	}
-	free(buf);
 	if (room_for_map(god, file_name))
 	{
 		printf("error: invalid elements\n");
 		ft_clean(god, 2);
-		return ;
+		return (1);
 	}
+	buf = ft_substr(file_name, ft_strlen(file_name) - 4, 4);
+	if (ft_strncmp(buf, ".cub", 4))
+	{
+		printf("error: map.cub extension\n");
+		ft_clean(god, 2);
+		free(buf);
+		return (1);
+	}
+	free(buf);
 	fill_map(god, file_name);
 	if (check_map(god))
 	{
 		printf("error: sorry but this map.cub incorrect\n");
 		ft_clean(god, 3);
+		return (1);
 	}
+	return (0);
 }
