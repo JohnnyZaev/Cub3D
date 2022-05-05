@@ -133,10 +133,8 @@ int			errors(int err);
 int			ecs(t_mlx_god *god);
 int			press(int key, t_keys *keys);
 int			unhold(int key, t_keys *keys);
-double		distance_bew_points(double x, double y, double xd, double yd);
 void		drawrays(t_mlx_god *god);
-int			ft_is_wall(double y, double x, t_mlx_god *god);
-double		ft_norm(double ray_ang);
+
 
 // parser.c
 int			parser(t_mlx_god *god, char *file_name);
@@ -145,6 +143,7 @@ int			check_map(t_mlx_god *god);
 
 // parser/parser_element_part.c
 int			parse_textures_and_color(t_mlx_god *god, char *file_name, int *fd);
+
 // parser/parse_color.c
 int			get_color(t_mlx_god *god, char *flags, int i, char *str);
 int			write_to_textures_massive(t_mlx_god *god, char *flags, \
@@ -152,5 +151,11 @@ int			write_to_textures_massive(t_mlx_god *god, char *flags, \
 
 // ft_clean.c
 void		ft_clean(t_mlx_god *god, int mode);
+//render.c
+void		render3d(t_mlx_god *god);
+//utils.c
+int			is_wall(double y, double x, t_mlx_god *god);
+double		ft_norm(double ray_ang);
+double		distance_bew_points(double x, double y, double xd, double yd);
 
 #endif
