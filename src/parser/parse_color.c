@@ -37,13 +37,13 @@ static int	loop_body(t_mlx_god *god, char *str, char flag, int *i)
 		return (1);
 	}
 	while (str[*i] == ' ')
-		*i = *i + 1;
+		(*i)++;
 	if (ft_strncmp(buf, &str[*i], ft_strlen(buf)))
 		return (1);
 	colorize(god, flag, buf);
 	while (str[*i] == ' ')
-		*i = *i + 1;
-	*i = *i + ft_strlen(buf);
+		(*i)++;
+	(*i) += ft_strlen(buf);
 	free(buf);
 	return (0);
 }

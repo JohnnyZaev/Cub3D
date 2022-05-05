@@ -139,7 +139,7 @@ int			ft_is_wall(double y, double x, t_mlx_god *god);
 double		ft_norm(double ray_ang);
 
 // parser.c
-int		parser(t_mlx_god *god, char *file_name);
+int			parser(t_mlx_god *god, char *file_name);
 // parser/check_map
 int			check_map(t_mlx_god *god);
 
