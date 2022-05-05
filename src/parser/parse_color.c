@@ -26,7 +26,7 @@ static void	colorize(t_mlx_god *god, int flag, char *buf)
 	}
 }
 
-static int	loop_body(t_mlx_god *god, char *str, char flag, int *i)
+static int	loop_body(t_mlx_god *god, char *str, char flag, size_t *i)
 {
 	char	*buf;
 
@@ -50,8 +50,8 @@ static int	loop_body(t_mlx_god *god, char *str, char flag, int *i)
 
 static int	parse_color(t_mlx_god *god, char *str, char flag)
 {
-	int		i;
-	int		j;
+	size_t		i;
+	size_t		j;
 
 	i = 0;
 	j = 0;
