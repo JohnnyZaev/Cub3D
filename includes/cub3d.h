@@ -152,6 +152,10 @@ int			get_color(t_mlx_god *god, char *flags, int i, char *str);
 int			write_to_textures_massive(t_mlx_god *god, char *flags, \
 				int i, char *str);
 
+// utils/initialization.c
+void		ft_init(t_mlx_god*	god, t_player* player);
+void		set_textures(t_mlx_god *god);
+
 // ft_clean.c
 void		ft_clean(t_mlx_god *god, int mode);
 //render.c

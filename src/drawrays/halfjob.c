@@ -36,8 +36,6 @@ static void	halfone_loopbody(t_mlx_god *god)
 
 void	ft_halfone(int i, t_mlx_god *god)
 {
-	god->draws->fhwhit = 0;
-	god->draws->vwallhit = 0;
 	god->draws->rayang = ft_norm(god->draws->rayang);
 	god->rays[i].down = ((god->draws->rayang > 0)
 			&& (god->draws->rayang < M_PI));

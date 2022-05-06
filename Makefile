@@ -39,7 +39,9 @@ SRC_FILES			=	main.c\
 						utils/utils.c\
 						render/render.c\
 						drawrays/drawrays.c\
-						drawrays/halfjob.c
+						drawrays/halfjob.c\
+						utils/initialization.c\
+						game_loop/game_loop.c
 
 OBJS				=	$(patsubst %.c, %.o, $(addprefix $(SRC_DIR), $(SRC_FILES)))
 
