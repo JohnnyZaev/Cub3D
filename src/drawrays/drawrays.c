@@ -12,6 +12,32 @@
 
 #include "cub3d.h"
 
+static void	drawrays_helper(t_mlx_god *god, int i)
+{
+	if (god->draws->fhwhit)
+		god->draws->hdistnc = distance_bew_points(god->player->x, \
+			god->player->y, god->draws->hwhitx, god->draws->hwhity);
+	else
+		god->draws->hdistnc = INT32_MAX;
+	if (god->draws->vwallhit)
+		god->draws->vdistnc = distance_bew_points(god->player->x, \
+			god->player->y, god->draws->vwhitx, god->draws->vwhity);
+	else
+		god->draws->vdistnc = INT32_MAX;
+	if (god->draws->hdistnc < god->draws->vdistnc)
+	{
+		god->rays[i].wallhx = god->draws->hwhitx;
+		god->rays[i].wallhy = god->draws->hwhity;
+		god->rays[i].distance = god->draws->hdistnc;
+	}
+	else
+	{
+		god->rays[i].wallhx = god->draws->vwhitx;
+		god->rays[i].wallhy = god->draws->vwhity;
+		god->rays[i].distance = god->draws->vdistnc;
+	}
+}
+
 void	drawrays(t_mlx_god *god)
 {
 	int		i;
@@ -24,21 +50,7 @@ void	drawrays(t_mlx_god *god)
 	{
 		ft_halfone(i, god);
 		ft_halftwo(i, god);
-		if (god->draws->fhwhit)
-			god->draws->hdistnc = distance_bew_points(god->player->x, \
-			god->player->y, god->draws->hwhitx, god->draws->hwhity);
-		else
-			god->draws->hdistnc = INT32_MAX;
-		if (god->draws->vwallhit)
-			god->draws->vdistnc = distance_bew_points(god->player->x, god->player->y, god->draws->vwhitx, god->draws->vwhity);
-		else
-			god->draws->vdistnc = INT32_MAX;
-		god->rays[i].wallhx = (god->draws->hdistnc
-				< god->draws->vdistnc) ? god->draws->hwhitx : god->draws->vwhitx;
-		god->rays[i].wallhy = (god->draws->hdistnc
-				< god->draws->vdistnc) ? god->draws->hwhity : god->draws->vwhity;
-		god->rays[i].distance = (god->draws->hdistnc < god->draws->vdistnc) ?
-								god->draws->hdistnc : god->draws->vdistnc;
+		drawrays_helper(god, i);
 		god->rays[i].angle = god->draws->rayang;
 		god->rays[i].hitvert = (god->draws->vdistnc < god->draws->hdistnc);
 		god->draws->rayang += (60 * (M_PI / 180)) / god->size_x;
