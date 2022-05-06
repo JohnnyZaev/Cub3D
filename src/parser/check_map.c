@@ -71,7 +71,8 @@ int	check_map(t_mlx_god *god)
 		j = 0;
 		while (god->map[i][j])
 		{
-			loop_body(god, i, j, &flag);
+			if (loop_body(god, i, j, &flag))
+				return (1);
 			j++;
 		}
 		i++;

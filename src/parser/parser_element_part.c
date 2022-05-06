@@ -43,7 +43,7 @@ static int	if_tree(t_mlx_god *god, char *flags, char *str)
 	}
 	else if (choice > 3 && choice < 6)
 	{
-		if (get_color(god, &flags[choice], choice - 3, str))
+		if (get_color(god, &flags[choice], choice - 4, str))
 			return (1);
 	}
 	else if (choice == 6)
