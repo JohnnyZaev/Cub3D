@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-//TODO fix for norm
+//qTODO fix for norm
 
 
 

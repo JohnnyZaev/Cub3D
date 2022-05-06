@@ -136,7 +136,8 @@ int			unhold(int key, t_keys *keys);
 
 //drawrays.c
 void		drawrays(t_mlx_god *god);
-
+void		ft_halfone(int i, t_mlx_god *god);
+void		ft_halftwo(int i, t_mlx_god *god);
 
 // parser.c
 int			parser(t_mlx_god *god, char *file_name);
