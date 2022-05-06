@@ -156,6 +156,11 @@ int			write_to_textures_massive(t_mlx_god *god, char *flags, \
 void		ft_init(t_mlx_god*	god, t_player* player);
 void		set_textures(t_mlx_god *god);
 
+// game_loop.c
+int	game_loop(t_mlx_god *god);
+int	press(int key, t_keys *keys);
+int	unhold(int key, t_keys *keys);
+
 // ft_clean.c
 void		ft_clean(t_mlx_god *god, int mode);
 //render.c
