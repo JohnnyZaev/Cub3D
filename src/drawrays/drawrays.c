@@ -16,12 +16,12 @@ static void	drawrays_helper(t_mlx_god *god, int i)
 {
 	if (god->draws->fhwhit)
 		god->draws->hdistnc = distance_bew_points(god->player->x, \
-			god->player->y, god->draws->hwhitx, god->draws->hwhity);
+		god->player->y, god->draws->hwhitx, god->draws->hwhity);
 	else
 		god->draws->hdistnc = INT32_MAX;
 	if (god->draws->vwallhit)
 		god->draws->vdistnc = distance_bew_points(god->player->x, \
-			god->player->y, god->draws->vwhitx, god->draws->vwhity);
+		god->player->y, god->draws->vwhitx, god->draws->vwhity);
 	else
 		god->draws->vdistnc = INT32_MAX;
 	if (god->draws->hdistnc < god->draws->vdistnc)
@@ -40,7 +40,7 @@ static void	drawrays_helper(t_mlx_god *god, int i)
 
 void	drawrays(t_mlx_god *god)
 {
-	int		i;
+	int	i;
 
 	god->draws->fhwhit = 0;
 	god->draws->vwallhit = 0;

@@ -130,7 +130,7 @@ typedef struct s_mlx_god
 
 //TODO create folders and topics for header
 int			errors(int err);
-int			ecs(t_mlx_god *god);
+int			esc(t_mlx_god *god);
 int			press(int key, t_keys *keys);
 int			unhold(int key, t_keys *keys);
 
@@ -164,5 +164,7 @@ void		render3d(t_mlx_god *god);
 int			is_wall(double y, double x, t_mlx_god *god);
 double		ft_norm(double ray_ang);
 double		distance_bew_points(double x, double y, double xd, double yd);
+
+int			game_loop(t_mlx_god *god);
 
 #endif

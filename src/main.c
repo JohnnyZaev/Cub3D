@@ -12,21 +12,23 @@
 
 #include "cub3d.h"
 
-int	ecs(t_mlx_god *god)
+static void	mlx_start(t_mlx_god *god)
 {
-	mlx_destroy_window(god->mlx, god->win);
-	exit(0);
-}
+	t_rays		*rays;
 
-int	errors(int err)
-{
-	if (err == 1)
-		printf("Malloc error\n");
-	if (err == 2)
-		printf("Mlx error\n");
-	if (err == 3)
-		printf("Arguments error\n");
-	exit(err);
+	mlx_get_screen_size(&god->size_x, &god->size_y);
+	rays = malloc(sizeof(t_rays) * god->size_x);
+	god->rays = rays;
+	god->mlx = mlx_init();
+	if (!god->mlx)
+		errors(2);
+	god->win = mlx_new_window(god->mlx, god->size_x, god->size_y, "Cub3D");
+	set_textures(god);
+	mlx_hook(god->win, 17, 0, esc, god);
+	mlx_hook(god->win, 2, 0, press, god->keys);
+	mlx_hook(god->win, 3, 0, unhold, god->keys);
+	mlx_loop_hook(god->mlx, &game_loop, god);
+	mlx_loop(god->mlx);
 }
 
 int	main(int argc, char **argv)
@@ -34,9 +36,8 @@ int	main(int argc, char **argv)
 	t_player	player;
 	t_mlx_god	god;
 	t_keys		keys;
-	t_draws 	draws;
-	t_render 	render;
-	t_rays		*rays;
+	t_draws		draws;
+	t_render	render;
 
 	ft_memset(&keys, false, sizeof(keys));
 	god.draws = &draws;
@@ -47,17 +48,5 @@ int	main(int argc, char **argv)
 	ft_init(&god, &player);
 	if (parser(&god, argv[1]))
 		return (1);
-	mlx_get_screen_size(&god.size_x, &god.size_y);
-	rays = malloc(sizeof(t_rays) * god.size_x);
-	god.rays = rays;
-	god.mlx = mlx_init();
-	if (!god.mlx)
-		errors(2);
-	god.win = mlx_new_window(god.mlx, god.size_x, god.size_y, "Cub3D");
-	set_textures(&god);
-	mlx_hook(god.win, 17, 0, ecs, &god);
-	mlx_hook(god.win, 2, 0, press, (&god)->keys);
-	mlx_hook(god.win, 3, 0, unhold, (&god)->keys);
-	mlx_loop_hook(god.mlx, game_loop, &god);
-	mlx_loop(god.mlx);
+	mlx_start(&god);
 }

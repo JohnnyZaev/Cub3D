@@ -35,3 +35,20 @@ double	distance_bew_points(double x, double y, double xd, double yd)
 {
 	return (sqrt(pow((xd - x), 2) + pow(yd - y, 2)));
 }
+
+int	esc(t_mlx_god *god)
+{
+	mlx_destroy_window(god->mlx, god->win);
+	exit(0);
+}
+
+int	errors(int err)
+{
+	if (err == 1)
+		printf("Malloc error\n");
+	if (err == 2)
+		printf("Mlx error\n");
+	if (err == 3)
+		printf("Arguments error\n");
+	exit(err);
+}
