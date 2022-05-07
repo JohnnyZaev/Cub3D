@@ -128,11 +128,6 @@ typedef struct s_mlx_god
 	int			txty;
 }				t_mlx_god;
 
-int			errors(int err);
-int			esc(t_mlx_god *god);
-int			press(int key, t_keys *keys);
-int			unhold(int key, t_keys *keys);
-
 //drawrays.c
 void		drawrays(t_mlx_god *god);
 void		ft_halfone(int i, t_mlx_god *god);
@@ -140,6 +135,7 @@ void		ft_halftwo(int i, t_mlx_god *god);
 
 // parser.c
 int			parser(t_mlx_god *god, char *file_name);
+
 // parser/check_map
 int			check_map(t_mlx_god *god);
 
@@ -151,24 +147,28 @@ int			get_color(t_mlx_god *god, char *flags, int i, char *str);
 int			write_to_textures_massive(t_mlx_god *god, char *flags, \
 				int i, char *str);
 
+//utils
+int			errors(int err);
+int			esc(t_mlx_god *god);
+
 // utils/initialization.c
-void		ft_init(t_mlx_god*	god, t_player* player);
+void		ft_init(t_mlx_god *god, t_player *player);
 void		set_textures(t_mlx_god *god);
 
 // game_loop.c
-int	game_loop(t_mlx_god *god);
-int	press(int key, t_keys *keys);
-int	unhold(int key, t_keys *keys);
+int			game_loop(t_mlx_god *god);
+int			press(int key, t_keys *keys);
+int			unhold(int key, t_keys *keys);
 
 // ft_clean.c
 void		ft_clean(t_mlx_god *god, int mode);
+
 //render.c
 void		render3d(t_mlx_god *god);
+
 //utils.c
 int			is_wall(double y, double x, t_mlx_god *god);
 double		ft_norm(double ray_ang);
 double		distance_bew_points(double x, double y, double xd, double yd);
-
-int			game_loop(t_mlx_god *god);
 
 #endif
