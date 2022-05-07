@@ -128,7 +128,6 @@ typedef struct s_mlx_god
 	int			txty;
 }				t_mlx_god;
 
-//TODO create folders and topics for header
 int			errors(int err);
 int			esc(t_mlx_god *god);
 int			press(int key, t_keys *keys);
