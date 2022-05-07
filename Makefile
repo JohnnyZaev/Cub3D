@@ -23,7 +23,7 @@ SRC_BONUS_DIR		=	src_bonus/
 
 HEADER_DIR			=	includes/
 HEADER				=	$(HEADER_DIR)cub3d.h
-HEADER_BONUS		=	$(HEADER_DIR)cub3d.h
+HEADER_BONUS		=	$(HEADER_DIR)cub3d_bonus.h
 
 LIBFT_DIR			=	libft/
 LIBFT				=	$(LIBFT_DIR)libft.a
@@ -78,7 +78,7 @@ $(NAME)				:	$(OBJS)
 
 bonus				:	$(LIBFT) $(MLX) $(NAME_BONUS)
 
-$(NAME_BONUS)				:	$(OBJS_BONUS)
+$(NAME_BONUS)		:	$(OBJS_BONUS)
 							$(CC) $(CFLAGS) $(OBJS_BONUS) -L$(LIBFT_DIR) $(LIBFT_FLAGS) -L$(MLX_DIR) $(MLX_FLAGS) -o $@
 
 
