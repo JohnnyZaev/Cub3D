@@ -14,16 +14,31 @@
 
 static void	if_player(t_mlx_god *god, char point, int i, int j)
 {
+	double	stuck_helper;
+
+	stuck_helper = 0;
 	if (point == 'N')
+	{
 		god->player->angle = 270;
+		stuck_helper = 0.5;
+	}
 	else if (point == 'S')
+	{
 		god->player->angle = 90;
+		stuck_helper = 0.5;
+	}
 	else if (point == 'E')
+	{
 		god->player->angle = 0;
+		stuck_helper = 0.5;
+	}
 	else if (point == 'W')
+	{
 		god->player->angle = 180;
-	god->player->x = j * TAIL_SIZE;
-	god->player->y = i * TAIL_SIZE;
+		stuck_helper = 0.5;
+	}
+	god->player->x = (j + stuck_helper) * TAIL_SIZE;
+	god->player->y = (i + stuck_helper) * TAIL_SIZE;
 }
 
 static int	if_void(t_mlx_god *god, int i, int j)
