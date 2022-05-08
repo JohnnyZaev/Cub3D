@@ -67,23 +67,35 @@ static void	delta_movement(t_mlx_god *god)
 {
 	if (god->keys->left)
 	{
-		god->player->x -= sin_cos_values(god, 1) * god->player->speed;
-		god->player->y -= sin_cos_values(god, 2) * god->player->speed;
+		if (is_wall(god->player->y - sin_cos_values(god, 2) * god->player->speed, god->player->x - sin_cos_values(god, 1) * god->player->speed, god))
+		{
+			god->player->x -= sin_cos_values(god, 1) * god->player->speed;
+			god->player->y -= sin_cos_values(god, 2) * god->player->speed;
+		}
 	}
 	if (god->keys->right)
 	{
-		god->player->x += sin_cos_values(god, 1) * god->player->speed;
-		god->player->y += sin_cos_values(god, 2) * god->player->speed;
+		if (is_wall(god->player->y + sin_cos_values(god, 2) * god->player->speed, god->player->x + sin_cos_values(god, 1) * god->player->speed, god)){
+			god->player->x += sin_cos_values(god, 1) * god->player->speed;
+			god->player->y += sin_cos_values(god, 2) * god->player->speed;
+		}
+
 	}
 	if (god->keys->back)
 	{
-		god->player->x -= sin_cos_values(god, 3) * god->player->speed;
-		god->player->y -= sin_cos_values(god, 4) * god->player->speed;
+		if (is_wall(god->player->y - sin_cos_values(god, 4) * god->player->speed, god->player->x - sin_cos_values(god, 3) * god->player->speed, god))
+		{
+			god->player->x -= sin_cos_values(god, 3) * god->player->speed;
+			god->player->y -= sin_cos_values(god, 4) * god->player->speed;
+		}
 	}
 	if (god->keys->forward)
 	{
-		god->player->x += sin_cos_values(god, 3) * god->player->speed;
-		god->player->y += sin_cos_values(god, 4) * god->player->speed;
+		if (is_wall(god->player->y + sin_cos_values(god, 4) * god->player->speed, god->player->x + sin_cos_values(god, 3) * god->player->speed, god))
+		{
+			god->player->x += sin_cos_values(god, 3) * god->player->speed;
+			god->player->y += sin_cos_values(god, 4) * god->player->speed;
+		}
 	}
 }
 
