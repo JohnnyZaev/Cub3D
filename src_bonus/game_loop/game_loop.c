@@ -12,44 +12,6 @@
 
 #include "cub3d_bonus.h"
 
-int	unhold(int key, t_keys *keys)
-{
-	if (key == ESC)
-		keys->exit = false;
-	if (key == RC_ROTATE)
-		keys->rightr = false;
-	if (key == CL_ROTATE)
-		keys->leftr = false;
-	if (key == LEFT)
-		keys->left = false;
-	if (key == RIGHT)
-		keys->right = false;
-	if (key == DOWN)
-		keys->back = false;
-	if (key == UP)
-		keys->forward = false;
-	return (0);
-}
-
-int	press(int key, t_keys *keys)
-{
-	if (key == ESC)
-		keys->exit = true;
-	if (key == RC_ROTATE)
-		keys->rightr = true;
-	if (key == CL_ROTATE)
-		keys->leftr = true;
-	if (key == LEFT)
-		keys->left = true;
-	if (key == RIGHT)
-		keys->right = true;
-	if (key == DOWN)
-		keys->back = true;
-	if (key == UP)
-		keys->forward = true;
-	return (0);
-}
-
 static double	sin_cos_values(t_mlx_god *god, int flag)
 {
 	if (flag == 1)
@@ -63,11 +25,13 @@ static double	sin_cos_values(t_mlx_god *god, int flag)
 	return (0);
 }
 
-static void	delta_movement(t_mlx_god *god)
+static void	delta_movement_helper(t_mlx_god *god)
 {
 	if (god->keys->left)
 	{
-		if (is_wall(god->player->y - sin_cos_values(god, 2) * (god->player->speed + 5), god->player->x - sin_cos_values(god, 1) * (god->player->speed + 5), god))
+		if (is_wall(god->player->y - sin_cos_values(god, 2) \
+		* (god->player->speed + 10), god->player->x - sin_cos_values(god, 1) \
+		* (god->player->speed + 10), god))
 		{
 			god->player->x -= sin_cos_values(god, 1) * god->player->speed;
 			god->player->y -= sin_cos_values(god, 2) * god->player->speed;
@@ -75,15 +39,24 @@ static void	delta_movement(t_mlx_god *god)
 	}
 	if (god->keys->right)
 	{
-		if (is_wall(god->player->y + sin_cos_values(god, 2) * (god->player->speed + 5), god->player->x + sin_cos_values(god, 1) * (god->player->speed + 5), god)){
+		if (is_wall(god->player->y + sin_cos_values(god, 2) \
+		* (god->player->speed + 10), god->player->x + sin_cos_values(god, 1) \
+		* (god->player->speed + 10), god))
+		{
 			god->player->x += sin_cos_values(god, 1) * god->player->speed;
 			god->player->y += sin_cos_values(god, 2) * god->player->speed;
 		}
-
 	}
+}
+
+static void	delta_movement(t_mlx_god *god)
+{
+	delta_movement_helper(god);
 	if (god->keys->back)
 	{
-		if (is_wall(god->player->y - sin_cos_values(god, 4) * (god->player->speed + 5), god->player->x - sin_cos_values(god, 3) * (god->player->speed + 5), god))
+		if (is_wall(god->player->y - sin_cos_values(god, 4) \
+		* (god->player->speed + 10), god->player->x - sin_cos_values(god, 3) \
+		* (god->player->speed + 10), god))
 		{
 			god->player->x -= sin_cos_values(god, 3) * god->player->speed;
 			god->player->y -= sin_cos_values(god, 4) * god->player->speed;
@@ -91,7 +64,9 @@ static void	delta_movement(t_mlx_god *god)
 	}
 	if (god->keys->forward)
 	{
-		if (is_wall(god->player->y + sin_cos_values(god, 4) * (god->player->speed + 5), god->player->x + sin_cos_values(god, 3) * (god->player->speed + 5), god))
+		if (is_wall(god->player->y + sin_cos_values(god, 4) \
+		* (god->player->speed + 10), god->player->x + sin_cos_values(god, 3) \
+		* (god->player->speed + 10), god))
 		{
 			god->player->x += sin_cos_values(god, 3) * god->player->speed;
 			god->player->y += sin_cos_values(god, 4) * god->player->speed;
