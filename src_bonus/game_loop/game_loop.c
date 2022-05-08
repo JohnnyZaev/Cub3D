@@ -67,7 +67,7 @@ static void	delta_movement(t_mlx_god *god)
 {
 	if (god->keys->left)
 	{
-		if (is_wall(god->player->y - sin_cos_values(god, 2) * god->player->speed, god->player->x - sin_cos_values(god, 1) * god->player->speed, god))
+		if (is_wall(god->player->y - sin_cos_values(god, 2) * (god->player->speed + 5), god->player->x - sin_cos_values(god, 1) * (god->player->speed + 5), god))
 		{
 			god->player->x -= sin_cos_values(god, 1) * god->player->speed;
 			god->player->y -= sin_cos_values(god, 2) * god->player->speed;
@@ -75,7 +75,7 @@ static void	delta_movement(t_mlx_god *god)
 	}
 	if (god->keys->right)
 	{
-		if (is_wall(god->player->y + sin_cos_values(god, 2) * god->player->speed, god->player->x + sin_cos_values(god, 1) * god->player->speed, god)){
+		if (is_wall(god->player->y + sin_cos_values(god, 2) * (god->player->speed + 5), god->player->x + sin_cos_values(god, 1) * (god->player->speed + 5), god)){
 			god->player->x += sin_cos_values(god, 1) * god->player->speed;
 			god->player->y += sin_cos_values(god, 2) * god->player->speed;
 		}
@@ -83,7 +83,7 @@ static void	delta_movement(t_mlx_god *god)
 	}
 	if (god->keys->back)
 	{
-		if (is_wall(god->player->y - sin_cos_values(god, 4) * god->player->speed, god->player->x - sin_cos_values(god, 3) * god->player->speed, god))
+		if (is_wall(god->player->y - sin_cos_values(god, 4) * (god->player->speed + 5), god->player->x - sin_cos_values(god, 3) * (god->player->speed + 5), god))
 		{
 			god->player->x -= sin_cos_values(god, 3) * god->player->speed;
 			god->player->y -= sin_cos_values(god, 4) * god->player->speed;
@@ -91,7 +91,7 @@ static void	delta_movement(t_mlx_god *god)
 	}
 	if (god->keys->forward)
 	{
-		if (is_wall(god->player->y + sin_cos_values(god, 4) * god->player->speed, god->player->x + sin_cos_values(god, 3) * god->player->speed, god))
+		if (is_wall(god->player->y + sin_cos_values(god, 4) * (god->player->speed + 5), god->player->x + sin_cos_values(god, 3) * (god->player->speed + 5), god))
 		{
 			god->player->x += sin_cos_values(god, 3) * god->player->speed;
 			god->player->y += sin_cos_values(god, 4) * god->player->speed;
