@@ -12,6 +12,16 @@
 
 #include "cub3d_bonus.h"
 
+//static int	mouse_move(int x, int y, t_mlx_god *god)
+//{
+//	(void)y;
+//	if (x > 0)
+//		god->keys->rightr = true;
+//	if (x < 0)
+//		god->keys->leftr = true;
+//	return (0);
+//}
+
 static void	mlx_start(t_mlx_god *god)
 {
 	t_rays		*rays;
@@ -24,9 +34,10 @@ static void	mlx_start(t_mlx_god *god)
 		errors(2);
 	god->win = mlx_new_window(god->mlx, god->size_x, god->size_y, "Cub3D");
 	set_textures(god);
-	mlx_hook(god->win, 17, 0, esc, god);
-	mlx_hook(god->win, 2, 0, press, god->keys);
-	mlx_hook(god->win, 3, 0, unhold, god->keys);
+	mlx_hook(god->win, 17, 0, &esc, god);
+	mlx_hook(god->win, 2, 0, &press, god->keys);
+	mlx_hook(god->win, 3, 0, &unhold, god->keys);
+//	mlx_hook(god->win, 6, 0, &mouse_move, god);
 	mlx_loop_hook(god->mlx, &game_loop, god);
 	mlx_loop(god->mlx);
 }
