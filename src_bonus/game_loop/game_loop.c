@@ -83,9 +83,9 @@ int	game_loop(t_mlx_god *god)
 	}
 	delta_movement(god);
 	if (god->keys->rightr)
-		god->player->angle -= 3;
+		god->player->angle -= 1;
 	if (god->keys->leftr)
-		god->player->angle += 3;
+		god->player->angle += 1;
 	mlx_destroy_image(god->mlx, god->img.img_ptr);
 	mlx_clear_window(god->mlx, god->win);
 	god->img.img_ptr = mlx_new_image(god->mlx, god->size_x, god->size_y);

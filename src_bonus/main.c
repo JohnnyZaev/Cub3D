@@ -12,15 +12,23 @@
 
 #include "cub3d_bonus.h"
 
-//static int	mouse_move(int x, int y, t_mlx_god *god)
-//{
-//	(void)y;
-//	if (x > 0)
-//		god->keys->rightr = true;
-//	if (x < 0)
-//		god->keys->leftr = true;
-//	return (0);
-//}
+static int	mouse_move(int x, int y, t_mlx_god *god)
+{
+	int	resolution_part;
+
+	resolution_part = god->size_x / 5;
+	(void)y;
+	if (x > 0 && x < resolution_part)
+		god->keys->rightr = true;
+	else if (x > god->size_x - resolution_part)
+		god->keys->leftr = true;
+	else
+	{
+		god->keys->rightr = false;
+		god->keys->leftr = false;
+	}
+	return (0);
+}
 
 static void	mlx_start(t_mlx_god *god)
 {
@@ -37,7 +45,7 @@ static void	mlx_start(t_mlx_god *god)
 	mlx_hook(god->win, 17, 0, &esc, god);
 	mlx_hook(god->win, 2, 0, &press, god->keys);
 	mlx_hook(god->win, 3, 0, &unhold, god->keys);
-//	mlx_hook(god->win, 6, 0, &mouse_move, god);
+	mlx_hook(god->win, 6, 0, &mouse_move, god);
 	mlx_loop_hook(god->mlx, &game_loop, god);
 	mlx_loop(god->mlx);
 }
