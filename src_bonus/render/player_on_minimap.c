@@ -12,6 +12,14 @@
 
 #include "cub3d_bonus.h"
 
+void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+
+	dst = img->mm_data + (y * img->mm_size_line + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
+}
+
 static int	is_wall_ray(t_mlx_god *god, double x, double y)
 {
 	int	x_ed;

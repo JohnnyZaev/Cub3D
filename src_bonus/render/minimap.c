@@ -12,14 +12,6 @@
 
 #include "cub3d_bonus.h"
 
-void	my_mlx_pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = img->mm_data + (y * img->mm_size_line + x * (img->bpp / 8));
-	*(unsigned int*)dst = color;
-}
-
 int	get_presice_color(char c)
 {
 	if (c == '1')
@@ -66,19 +58,11 @@ void	draw_canvas(t_mlx_god *god, int initial_x, int initial_y)
 	}
 }
 
-void	minimap_render(t_mlx_god *god, int initial_x, int initial_y)
+static void	loop_body(t_mlx_god *god, int i, int j)
 {
-	int	i;
-	int	j;
 	int	h;
 	int	k;
 
-	god->img.mm_img_ptr = mlx_new_image(god->mlx, 220, 220);
-	god->img.mm_data = mlx_get_data_addr(god->img.mm_img_ptr, &god->img.mm_bpp,
-											 &god->img.mm_size_line, &god->img.mm_endian);
-	i = (int)(god->player->x / TAIL_SIZE) - 10;
-	j = (int)(god->player->y / TAIL_SIZE) - 10;
-	draw_canvas(god, initial_x, initial_y);
 	k = 0;
 	while (j < god->map_size_y && k < 20)
 	{
@@ -95,6 +79,22 @@ void	minimap_render(t_mlx_god *god, int initial_x, int initial_y)
 		j++;
 		k++;
 	}
+}
+
+void	minimap_render(t_mlx_god *god, int initial_x, int initial_y)
+{
+	int	i;
+	int	j;
+
+	god->img.mm_img_ptr = mlx_new_image(god->mlx, 22 * MINIMAP_SZ,
+			22 * MINIMAP_SZ);
+	god->img.mm_data = mlx_get_data_addr(god->img.mm_img_ptr, &god->img.mm_bpp,
+			&god->img.mm_size_line, &god->img.mm_endian);
+	i = (int)(god->player->x / TAIL_SIZE) - 10;
+	j = (int)(god->player->y / TAIL_SIZE) - 10;
+	draw_canvas(god, initial_x, initial_y);
+	loop_body(god, i, j);
 	draw_player(god, initial_x, initial_y);
-	mlx_put_image_to_window(god->mlx, god->win, god->img.mm_img_ptr, initial_x, initial_y);
+	mlx_put_image_to_window(god->mlx, god->win,
+		god->img.mm_img_ptr, initial_x, initial_y);
 }
