@@ -32,6 +32,11 @@
 # define RC_ROTATE 123
 # define CL_ROTATE 124
 # define ESC 53
+# define MINIMAP_SZ 8
+# define WALL_COLOR 0x707070
+# define ROOM_COLOR 0xCCCCCC
+# define RAY_COLOR 0x9ACF1D
+# define PLAY_COLOR 0x004100
 
 typedef struct s_player
 {
@@ -40,6 +45,17 @@ typedef struct s_player
 	double	angle;
 	int		speed;
 }	t_player;
+
+typedef struct s_minimap
+{
+	double	cos;
+	double	sin;
+	double	angle;
+	double	x;
+	double	y;
+	double	off_x;
+	double	off_y;
+}	t_minimap;
 
 typedef struct s_keys
 {
@@ -165,6 +181,8 @@ void		ft_clean(t_mlx_god *god, int mode);
 
 //render.c
 void		render3d(t_mlx_god *god);
+void		minimap_render(t_mlx_god *god, int initial_x, int initial_y);
+void		draw_player(t_mlx_god *god, int initial_x, int initial_y);
 
 //utils.c
 int			is_wall(double y, double x, t_mlx_god *god);
