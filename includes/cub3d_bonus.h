@@ -75,6 +75,11 @@ typedef struct s_img
 	int			bpp;
 	int			size_line;
 	int			endian;
+	void		*mm_img_ptr;
+	char		*mm_data;
+	int			mm_bpp;
+	int			mm_size_line;
+	int			mm_endian;
 }					t_img;
 
 typedef struct s_draws
@@ -181,6 +186,7 @@ void		ft_clean(t_mlx_god *god, int mode);
 
 //render.c
 void		render3d(t_mlx_god *god);
+void		my_mlx_pixel_put(t_img *img, int x, int y, int color);
 void		minimap_render(t_mlx_god *god, int initial_x, int initial_y);
 void		draw_player(t_mlx_god *god, int initial_x, int initial_y);
 

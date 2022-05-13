@@ -73,7 +73,7 @@ static void	draw_line(t_mlx_god *god, t_minimap *mp)
 			if (is_wall_ray(god, ((double) i / MINIMAP_SZ) * mp->cos,
 					((double) i / MINIMAP_SZ) * mp->sin))
 				break ;
-			mlx_pixel_put(god->mlx, god->win, mp->x + i * mp->cos,
+			my_mlx_pixel_put(&god->img, mp->x + i * mp->cos,
 				mp->y + i * mp->sin, RAY_COLOR);
 			i++;
 		}
@@ -90,9 +90,9 @@ void	draw_player(t_mlx_god *god, int initial_x, int initial_y)
 	mp.x = initial_x + (10 * MINIMAP_SZ) + mp.off_x;
 	mp.y = initial_y + (10 * MINIMAP_SZ) + mp.off_y;
 	draw_line(god, &mp);
-	mlx_pixel_put(god->mlx, god->win, (int)mp.x, (int)mp.y, PLAY_COLOR);
-	mlx_pixel_put(god->mlx, god->win, (int)mp.x + 1, (int)mp.y, PLAY_COLOR);
-	mlx_pixel_put(god->mlx, god->win, (int)mp.x - 1, (int)mp.y, PLAY_COLOR);
-	mlx_pixel_put(god->mlx, god->win, (int)mp.x, (int)mp.y + 1, PLAY_COLOR);
-	mlx_pixel_put(god->mlx, god->win, (int)mp.x, (int)mp.y - 1, PLAY_COLOR);
+	my_mlx_pixel_put(&god->img, (int)mp.x, (int)mp.y, PLAY_COLOR);
+	my_mlx_pixel_put(&god->img, (int)mp.x + 1, (int)mp.y, PLAY_COLOR);
+	my_mlx_pixel_put(&god->img, (int)mp.x - 1, (int)mp.y, PLAY_COLOR);
+	my_mlx_pixel_put(&god->img, (int)mp.x, (int)mp.y + 1, PLAY_COLOR);
+	my_mlx_pixel_put(&god->img, (int)mp.x, (int)mp.y - 1, PLAY_COLOR);
 }
