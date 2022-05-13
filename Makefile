@@ -54,6 +54,8 @@ SRC_BONUS_FILES		=	main.c\
 						utils/ft_clean.c\
 						utils/utils.c\
 						render/render.c\
+						render/minimap.c\
+						render/player_on_minimap.c\
 						drawrays/drawrays.c\
 						drawrays/halfjob.c\
 						utils/initialization.c\

@@ -94,5 +94,6 @@ int	game_loop(t_mlx_god *god)
 	drawrays(god);
 	render3d(god);
 	mlx_put_image_to_window(god->mlx, god->win, god->img.img_ptr, 0, 0);
+	minimap_render(god, MINIMAP_SZ, MINIMAP_SZ);
 	return (0);
 }
