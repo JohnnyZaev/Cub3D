@@ -71,7 +71,7 @@ static void	loop_body(t_mlx_god *god, int i, int j)
 		while (i < god->map_size_x && h < 20)
 		{
 			if (i >= 0 && j >= 0)
-				draw_square(god, initial_x + h * MINIMAP_SZ, initial_y
+				draw_square(god, MINIMAP_SZ + h * MINIMAP_SZ, MINIMAP_SZ
 					+ k * MINIMAP_SZ, get_presice_color(god->map[j][i]));
 			i++;
 			h++;
