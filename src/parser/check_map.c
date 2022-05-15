@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 16:49:24 by ereginia          #+#    #+#             */
-/*   Updated: 2022/05/04 16:49:27 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/05/15 14:58:40 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ static void	if_player(t_mlx_god *god, char point, int i, int j)
 
 static int	if_void(t_mlx_god *god, int i, int j)
 {
+	if ((i == 0 || j == 0 || i == god->map_size_y - 1 || \
+		j == god->map_size_x - 2))
+		return (1);
 	if ((i > 0 && god->map[i - 1][j] == ' ') || \
 		(i < god->map_size_x && god->map[i + 1][j] == ' ') || \
 		(j > 0 && god->map[i][j - 1] == ' ') || \
-		(j < god->map_size_y && god->map[i][j + 1] == ' ') || \
-		(i == 0 || j == 0 || i == god->map_size_y || \
-		j == god->map_size_x))
+		(j < god->map_size_y && god->map[i][j + 1] == ' '))
 		return (1);
 	return (0);
 }
