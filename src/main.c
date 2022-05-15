@@ -6,7 +6,7 @@
 /*   By: ereginia <ereginia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/25 15:21:46 by gvarys            #+#    #+#             */
-/*   Updated: 2022/05/15 15:01:58 by ereginia         ###   ########.fr       */
+/*   Updated: 2022/05/15 15:12:32 by ereginia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	god.draws = &draws;
 	god.keys = &keys;
 	god.render = &render;
-	if (argc != 2 || ft_strlen(argv[1] < 4))
+	if (argc != 2 || ft_strlen(argv[1]) < 4)
 		errors(3);
 	ft_init(&god, &player);
 	if (parser(&god, argv[1]))
