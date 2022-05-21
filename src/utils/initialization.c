@@ -35,18 +35,30 @@ void	set_textures(t_mlx_god *god)
 			&god->img.size_line, &god->img.endian);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[1], &tab[0], &tab[1]);
 	if (!img || !god->img.data)
+	{
+		printf("textures error\n");
 		esc(god);
+	}
 	god->texturep[0] = (int *)mlx_get_data_addr(img, &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[3], &tab[0], &tab[1]);
 	if (!img || !god->img.data)
+	{
+		printf("textures error\n");
 		esc(god);
+	}
 	god->texturep[1] = (int *)mlx_get_data_addr(img, &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[0], &tab[0], &tab[1]);
 	if (!img || !god->img.data)
+	{
+		printf("textures error\n");
 		esc(god);
+	}
 	god->texturep[2] = (int *)mlx_get_data_addr(img, &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[2], &tab[0], &tab[1]);
 	if (!img || !god->img.data)
+	{
+		printf("textures error\n");
 		esc(god);
+	}
 	god->texturep[3] = (int *)mlx_get_data_addr(img, &tab[2], &tab[3], &tab[4]);
 }
