@@ -35,7 +35,7 @@
 # define MINIMAP_SZ 10
 # define WALL_COLOR 0x707070
 # define ROOM_COLOR 0xCCCCCC
-# define RAY_COLOR 0x9ACF1D
+# define RAY_COLOR 0xFF0000
 # define PLAY_COLOR 0x004100
 
 typedef struct s_player

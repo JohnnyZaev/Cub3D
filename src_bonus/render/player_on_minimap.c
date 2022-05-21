@@ -30,7 +30,7 @@ static int	is_wall_ray(t_mlx_god *god, double x, double y)
 	if (x_ed < 0 || y_ed < 0 || x_ed > god->map_size_x
 		|| y_ed > god->map_size_y)
 		return (1);
-	if (god->map[y_ed][x_ed] == '1')
+	if (god->map[y_ed][x_ed] == '1' || god->map[y_ed][x_ed] == ' ')
 		return (1);
 	return (0);
 }

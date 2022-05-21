@@ -49,6 +49,26 @@ static void	delta_movement_helper(t_mlx_god *god)
 	}
 }
 
+static void	giga_delta_movement_helper(t_mlx_god *god)
+{
+	if (god->keys->forward)
+	{
+		if (is_wall(god->player->y + sin_cos_values(god, 4) \
+			* (god->player->speed + 10), god->player->x \
+			+ sin_cos_values(god, 3) * (god->player->speed + 10), god) \
+			&& is_wall(god->player->y + sin_cos_values(god, 2) \
+			* (god->player->speed * 0.75f), god->player->x \
+			+ sin_cos_values(god, 3) * (god->player->speed * 0.75f), god) \
+			&& is_wall(god->player->y - sin_cos_values(god, 2) \
+			* (god->player->speed * 0.75f), god->player->x \
+			- sin_cos_values(god, 1) * (god->player->speed * 0.75f), god))
+		{
+			god->player->x += sin_cos_values(god, 3) * god->player->speed;
+			god->player->y += sin_cos_values(god, 4) * god->player->speed;
+		}
+	}
+}
+
 static void	delta_movement(t_mlx_god *god)
 {
 	delta_movement_helper(god);
@@ -62,16 +82,7 @@ static void	delta_movement(t_mlx_god *god)
 			god->player->y -= sin_cos_values(god, 4) * god->player->speed;
 		}
 	}
-	if (god->keys->forward)
-	{
-		if (is_wall(god->player->y + sin_cos_values(god, 4) \
-		* (god->player->speed + 10), god->player->x + sin_cos_values(god, 3) \
-		* (god->player->speed + 10), god))
-		{
-			god->player->x += sin_cos_values(god, 3) * god->player->speed;
-			god->player->y += sin_cos_values(god, 4) * god->player->speed;
-		}
-	}
+	giga_delta_movement_helper(god);
 }
 
 int	game_loop(t_mlx_god *god)
@@ -83,9 +94,9 @@ int	game_loop(t_mlx_god *god)
 	}
 	delta_movement(god);
 	if (god->keys->rightr)
-		god->player->angle -= 1;
+		god->player->angle -= 1.75;
 	if (god->keys->leftr)
-		god->player->angle += 1;
+		god->player->angle += 1.75;
 	mlx_destroy_image(god->mlx, god->img.img_ptr);
 	mlx_clear_window(god->mlx, god->win);
 	god->img.img_ptr = mlx_new_image(god->mlx, god->size_x, god->size_y);
