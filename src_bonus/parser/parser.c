@@ -69,7 +69,7 @@ int	room_for_map(t_mlx_god *god, char *file_name)
 		free(str);
 		str = get_next_line(fd);
 	}
-	if (find_symbols(str, " 01NSEW"))
+	if (str == NULL || find_symbols(str, " 01NSEW"))
 		return (1);
 	while (str)
 	{

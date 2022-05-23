@@ -25,6 +25,15 @@ void	ft_init(t_mlx_god *god, t_player *player)
 	player->speed = 5;
 }
 
+void	just_check(t_mlx_god *god, void	*img)
+{
+	if (!img || !god->img.data)
+	{
+		printf("textures error\n");
+		esc(god);
+	}
+}
+
 void	set_textures(t_mlx_god *god)
 {
 	void	*img;
@@ -34,31 +43,15 @@ void	set_textures(t_mlx_god *god)
 	god->img.data = (int *)mlx_get_data_addr(god->img.img_ptr, &god->img.bpp,
 			&god->img.size_line, &god->img.endian);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[3], &tab[0], &tab[1]);
-	if (!img || !god->img.data)
-	{
-		printf("textures error\n");
-		esc(god);
-	}
+	just_check(god, img);
 	god->texturep[0] = (int *)mlx_get_data_addr(img, &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[2], &tab[0], &tab[1]);
-	if (!img || !god->img.data)
-	{
-		printf("textures error\n");
-		esc(god);
-	}
+	just_check(god, img);
 	god->texturep[1] = (int *)mlx_get_data_addr(img, &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[0], &tab[0], &tab[1]);
-	if (!img || !god->img.data)
-	{
-		printf("textures error\n");
-		esc(god);
-	}
+	just_check(god, img);
 	god->texturep[2] = (int *)mlx_get_data_addr(img, &tab[2], &tab[3], &tab[4]);
 	img = mlx_xpm_file_to_image(god->mlx, god->textures[1], &tab[0], &tab[1]);
-	if (!img || !god->img.data)
-	{
-		printf("textures error\n");
-		esc(god);
-	}
+	just_check(god, img);
 	god->texturep[3] = (int *)mlx_get_data_addr(img, &tab[2], &tab[3], &tab[4]);
 }
