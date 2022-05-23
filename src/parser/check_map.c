@@ -59,7 +59,7 @@ static int	loop_body(t_mlx_god *god, int i, int j, int *flag)
 	if (god->map[i][j] == 'N' || god->map[i][j] == 'S'
 		|| god->map[i][j] == 'E' || god->map[i][j] == 'W')
 	{
-		if (*flag == 1 || (god->map[i][j + 1] == ' '
+		if (*flag == 1 || i == 0 || j == 0 || (god->map[i][j + 1] == ' '
 			|| god->map[i][j - 1] == ' ' || god->map[i + 1][j] == ' '
 			|| god->map[i - 1][j] == ' '))
 			return (1);
