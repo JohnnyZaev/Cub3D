@@ -46,10 +46,10 @@ static int	if_void(t_mlx_god *god, int i, int j)
 	if ((i == 0 || j == 0 || i == god->map_size_y - 1 || \
 		j == god->map_size_x - 2))
 		return (1);
-	if ((i > 0 && god->map[i - 1][j] == ' ') || \
-		(i < god->map_size_x && god->map[i + 1][j] == ' ') || \
-		(j > 0 && god->map[i][j - 1] == ' ') || \
-		(j < god->map_size_y && god->map[i][j + 1] == ' '))
+	if (god->map[i - 1][j] == ' ' || \
+		god->map[i + 1][j] == ' ' || \
+		god->map[i][j - 1] == ' ' || \
+		god->map[i][j + 1] == ' ')
 		return (1);
 	return (0);
 }
@@ -59,9 +59,7 @@ static int	loop_body(t_mlx_god *god, int i, int j, int *flag)
 	if (god->map[i][j] == 'N' || god->map[i][j] == 'S'
 		|| god->map[i][j] == 'E' || god->map[i][j] == 'W')
 	{
-		if (*flag == 1 || (god->map[i][j + 1] == ' '
-			|| god->map[i][j - 1] == ' ' || god->map[i + 1][j] == ' '
-			|| god->map[i - 1][j] == ' '))
+		if (*flag == 1 || if_void(god, i, j))
 			return (1);
 		*flag = 1;
 		if_player(god, god->map[i][j], i, j);
